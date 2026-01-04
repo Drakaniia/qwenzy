@@ -79,6 +79,40 @@ F3::
 MButton::Send("!{Left}")
 """
 
+# PowerShell Script to configure 3-finger tap to go back
+TOUCHPAD_THREE_FINGER_BACK_SCRIPT = """
+# Configure 3-finger tap to go back (instead of opening task view)
+Write-Host "Configuring touchpad 3-finger tap to go back..."
+Write-Host ""
+
+# Try to open Windows Settings to the Touchpad page
+Write-Host "Opening Windows Settings to Touchpad configuration..."
+Start-Process "ms-settings:devices-touchpad"
+
+Write-Host ""
+Write-Host "================================================================================"
+Write-Host "MANUAL CONFIGURATION REQUIRED"
+Write-Host "================================================================================"
+Write-Host ""
+Write-Host "Windows 10/11 touchpad settings cannot be fully automated via registry."
+Write-Host "Please follow these steps to configure 3-finger tap:"
+Write-Host ""
+Write-Host "1. In the Settings window that opened, scroll down to 'Three-finger gestures'"
+Write-Host "2. Look for the 'Taps' section"
+Write-Host "3. Change it from 'Open task view' to 'Back'"
+Write-Host ""
+Write-Host "Alternative method:"
+Write-Host "1. Press Windows key + I to open Settings"
+Write-Host "2. Go to Bluetooth & devices > Touchpad"
+Write-Host "3. Scroll down to 'Three-finger gestures'"
+Write-Host "4. Set 'Taps' to 'Back'"
+Write-Host ""
+Write-Host "================================================================================"
+Write-Host ""
+Write-Host "Note: The AutoHotkey script (F3 and Middle Mouse) is separate from"
+Write-Host "touchpad gestures and will continue to work independently."
+"""
+
 # UI Configuration
 UI_CONFIG = {
     "header_title": "Windows Automation Toolkit",

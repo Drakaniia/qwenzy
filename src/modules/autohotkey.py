@@ -23,15 +23,11 @@ class AutoHotKeyManager:
         while True:
             self.system.clear_screen()
             self.system.print_header("AutoHotKey Setup & Management")
-            
+
             options = {
                 "1": {"title": "Install AutoHotKey"},
-                "2": {"title": "Create/Update Script"},
-                "3": {"title": "Run Script"},
-                "4": {"title": "Stop Script"},
-                "5": {"title": "Add to Startup"},
-                "6": {"title": "Auto-Start All on Boot"},
-                "7": {"title": "Script Status"},
+                "2": {"title": "Create Script & Auto-Start on Boot"},
+                "3": {"title": "Script Status"},
                 "0": {"title": "Back to Main Menu"}
             }
 
@@ -42,32 +38,64 @@ class AutoHotKeyManager:
             if choice == "1":
                 self.install_autohotkey()
             elif choice == "2":
-                self.create_script()
+                self.create_script_and_startup()
             elif choice == "3":
-                self.run_script()
-            elif choice == "4":
-                self.stop_script()
-            elif choice == "5":
-                self.add_to_startup()
-            elif choice == "6":
-                self.auto_start_all_on_boot()
-            elif choice == "7":
                 self.show_script_status()
             elif choice == "0":
                 return
     
     def check_autohotkey_installed(self):
         """Check if AutoHotKey is installed"""
+        # Common AutoHotkey installation paths
+        common_paths = [
+            r"C:\Program Files\AutoHotkey\v2\AutoHotkey64.exe",
+            r"C:\Program Files\AutoHotkey\v2\AutoHotkey32.exe",
+            r"C:\Program Files\AutoHotkey\v2\AutoHotkey.exe",
+            r"C:\Program Files\AutoHotkey\AutoHotkey64.exe",
+            r"C:\Program Files\AutoHotkey\AutoHotkey32.exe",
+            r"C:\Program Files\AutoHotkey\AutoHotkey.exe",
+            r"C:\Program Files (x86)\AutoHotkey\v2\AutoHotkey64.exe",
+            r"C:\Program Files (x86)\AutoHotkey\v2\AutoHotkey32.exe",
+            r"C:\Program Files (x86)\AutoHotkey\v2\AutoHotkey.exe",
+            r"C:\Program Files (x86)\AutoHotkey\AutoHotkey64.exe",
+            r"C:\Program Files (x86)\AutoHotkey\AutoHotkey32.exe",
+            r"C:\Program Files (x86)\AutoHotkey\AutoHotkey.exe",
+        ]
+
+        # Check if any of the common paths exist
+        for path in common_paths:
+            if os.path.exists(path):
+                self.ahk_executable = path
+                return True
+
+        # Try checking with winget
         try:
             result = subprocess.run(
-                [self.ahk_executable, "--version"], 
-                capture_output=True, 
-                text=True, 
+                ["winget", "list", "--id", "AutoHotkey.AutoHotkey"],
+                capture_output=True,
+                text=True,
                 timeout=10
             )
-            return result.returncode == 0
-        except (FileNotFoundError, subprocess.TimeoutExpired):
-            return False
+            if result.returncode == 0 and "AutoHotkey" in result.stdout:
+                return True
+        except:
+            pass
+
+        # Try to find it in PATH
+        try:
+            result = subprocess.run(
+                ["where", "AutoHotkey64.exe"],
+                capture_output=True,
+                text=True,
+                timeout=10
+            )
+            if result.returncode == 0 and result.stdout.strip():
+                self.ahk_executable = result.stdout.strip().split('\n')[0]
+                return True
+        except:
+            pass
+
+        return False
     
     def install_autohotkey(self):
         """Install AutoHotKey using winget"""
@@ -124,32 +152,133 @@ class AutoHotKeyManager:
         """Create or update the AutoHotKey script"""
         print("\nCreating AutoHotKey Script...")
         print("=" * 40)
-        
+
         # Create AutoHotKey directory
         ahk_dir = os.path.join(self.system.documents_folder, "AutoHotKey")
-        
+
         if not self.system.ensure_directory_exists(ahk_dir):
             print("Failed to create AutoHotKey directory")
             self.system.pause_execution()
             return
-        
+
         script_path = os.path.join(ahk_dir, self.ahk_script_name)
-        
+
         try:
             with open(script_path, 'w', encoding='utf-8') as f:
                 f.write(self.script_content)
-            
+
             print(f"AutoHotKey script created at: {script_path}")
             print("\nScript Content:")
             print("-" * 40)
             print(self.script_content)
             print("-" * 40)
-            
+
         except Exception as e:
             print(f"Error creating AutoHotKey script: {e}")
-        
+
         self.system.pause_execution()
-    
+
+    def create_script_and_startup(self):
+        """Create script and add it to Windows startup"""
+        print("\nCreating Script & Adding to Startup...")
+        print("=" * 40)
+
+        # First, ensure AutoHotKey is installed
+        if not self.check_autohotkey_installed():
+            print("AutoHotKey is not installed")
+            print("Installing AutoHotKey...")
+            self.install_autohotkey()
+
+            if not self.check_autohotkey_installed():
+                print("Failed to install AutoHotKey. Cannot proceed.")
+                self.system.pause_execution()
+                return
+
+        # Stop any running AutoHotkey scripts
+        if self.is_script_running():
+            print("\n⏹️ Stopping running scripts...")
+            try:
+                subprocess.run(["taskkill", "/F", "/IM", "AutoHotkey64.exe"],
+                             capture_output=True, timeout=10)
+                print("✓ Stopped running scripts")
+                import time
+                time.sleep(1)
+            except Exception as e:
+                print(f"✗ Error stopping scripts: {e}")
+
+        # Delete old script files
+        ahk_dir = os.path.join(self.system.documents_folder, "AutoHotKey")
+        script_path = os.path.join(ahk_dir, self.ahk_script_name)
+        startup_folder = self.system.get_system_path("startup")
+        startup_script_path = os.path.join(startup_folder, self.ahk_script_name) if startup_folder else None
+
+        files_deleted = []
+        for path in [script_path, startup_script_path]:
+            if path and os.path.exists(path):
+                try:
+                    os.remove(path)
+                    files_deleted.append(path)
+                    print(f"✓ Deleted old script: {path}")
+                except Exception as e:
+                    print(f"✗ Error deleting {path}: {e}")
+
+        if not files_deleted:
+            print("ℹ️ No old scripts found to delete")
+
+        # Create the script
+        if not self.system.ensure_directory_exists(ahk_dir):
+            print("Failed to create AutoHotKey directory")
+            self.system.pause_execution()
+            return
+
+        try:
+            with open(script_path, 'w', encoding='utf-8') as f:
+                f.write(self.script_content)
+
+            print(f"\n✓ Script created at: {script_path}")
+            print("\nScript Content:")
+            print("-" * 40)
+            print(self.script_content)
+            print("-" * 40)
+        except Exception as e:
+            print(f"✗ Error creating script: {e}")
+            self.system.pause_execution()
+            return
+
+        # Add to startup
+        if not startup_folder:
+            print("✗ Could not find startup folder")
+            self.system.pause_execution()
+            return
+
+        try:
+            shutil.copy2(script_path, startup_script_path)
+            print(f"\n✓ Script added to startup: {startup_script_path}")
+            print("✓ The script will automatically start when Windows boots")
+        except Exception as e:
+            print(f"✗ Error adding script to startup: {e}")
+            self.system.pause_execution()
+            return
+
+        # Start the script now
+        print("\n▶️ Starting script now...")
+        try:
+            subprocess.Popen([self.ahk_executable, script_path])
+            import time
+            time.sleep(2)
+
+            if self.is_script_running():
+                print("✓ Script is now running")
+                print("\nActive Features:")
+                print("• F3 → Left Mouse Button (hold/drag)")
+                print("• Middle Mouse → Browser Back")
+            else:
+                print("✗ Failed to start script")
+        except Exception as e:
+            print(f"✗ Error starting script: {e}")
+
+        self.system.pause_execution()
+
     def run_script(self):
         """Run the AutoHotKey script"""
         print("\n▶️ Running AutoHotKey Script...")
