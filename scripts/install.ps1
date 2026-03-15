@@ -17,9 +17,11 @@ Invoke-WebRequest -Uri $ReleaseUrl -OutFile $ZipPath -UseBasicParsing
 
 Write-Host "Extracting..." -ForegroundColor Yellow
 Expand-Archive -Path $ZipPath -DestinationPath $TempDir -Force
-Remove-Item $ZipPath -Force
+
+# Clean up zip (ignore errors if file is in use)
+try { Remove-Item $ZipPath -Force -ErrorAction SilentlyContinue } catch {}
 
 Write-Host "Launching Windows Toolkit..." -ForegroundColor Green
 Write-Host
 
-& $ExePath
+Start-Process -FilePath $ExePath
