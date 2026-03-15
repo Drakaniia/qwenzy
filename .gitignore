@@ -8,7 +8,8 @@ __pycache__/
 
 # Distribution / packaging
 .Python
-build/
+build/build/
+build/dist/
 develop-eggs/
 dist/
 downloads/
@@ -30,6 +31,7 @@ MANIFEST
 # PyInstaller
 *.manifest
 *.spec
+!build/*.spec
 
 # Installer logs
 pip-log.txt
