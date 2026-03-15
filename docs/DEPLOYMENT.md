@@ -213,7 +213,7 @@ After pushing a version tag:
 
 1. **PowerShell One-Liner** (on clean Windows VM):
    ```powershell
-   powershell -ExecutionPolicy Bypass "iwr https://raw.githubusercontent.com/Drakaniia/qwenzy/main/scripts/install-toolkit.ps1 | iex"
+   powershell -ExecutionPolicy Bypass "iwr -UseBasicParsing https://raw.githubusercontent.com/Drakaniia/qwenzy/main/scripts/install-toolkit.ps1 | iex"
    ```
 
 2. **Download from Releases:**

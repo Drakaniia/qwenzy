@@ -62,8 +62,8 @@ function Clone-Toolkit {
 
 function Install-Requirements {
     Write-Host "Installing Python requirements..." -ForegroundColor Yellow
-    pip install -r requirements.txt
-    Write-Host "Requirements installed!" -ForegroundColor Green
+    pip install -r requirements.txt --quiet
+    Write-Host "Requirements installed successfully!" -ForegroundColor Green
 }
 
 # Main execution
