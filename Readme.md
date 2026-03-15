@@ -18,12 +18,12 @@ Choose the method that works best for you:
 **Best for:** Quick use, no Python installation needed
 
 ```powershell
-powershell -ExecutionPolicy Bypass "iwr -UseBasicParsing https://raw.githubusercontent.com/Drakaniia/qwenzy/main/scripts/run-exe.ps1 | iex"
+powershell -ExecutionPolicy Bypass "iwr -UseBasicParsing https://github.com/Drakaniia/qwenzy/releases/latest/download/WindowsToolkit.zip -OutFile $env:TEMP\toolkit.zip; Expand-Archive $env:TEMP\toolkit.zip $env:TEMP -Force; & $env:TEMP\WindowsToolkit.exe"
 ```
 
 This will:
-- Download the latest `.exe` from Releases
-- Launch the toolkit immediately
+- Download the latest `.zip` from Releases
+- Extract and launch the toolkit immediately
 - No Python required
 
 Or download manually from [Releases](https://github.com/Drakaniia/qwenzy/releases)
