@@ -7,6 +7,7 @@ $ErrorActionPreference = "Stop"
 $ReleaseUrl = "https://api.github.com/repos/Drakaniia/qwenzy/releases/latest"
 $TempDir = $env:TEMP
 $ExePath = Join-Path $TempDir "WindowsToolkit.exe"
+$ZipPath = Join-Path $TempDir "WindowsToolkit.zip"
 
 function Write-Header {
     param([string]$Title)
@@ -29,10 +30,10 @@ function Get-LatestRelease {
 
 function Download-Executable {
     param([string]$DownloadUrl)
-    
+
     Write-Host "Downloading WindowsToolkit.exe..." -ForegroundColor Yellow
     Write-Host "From: $DownloadUrl" -ForegroundColor Gray
-    
+
     try {
         Invoke-WebRequest -Uri $DownloadUrl -OutFile $ExePath -UseBasicParsing
         Write-Host "Download complete!" -ForegroundColor Green
@@ -42,9 +43,29 @@ function Download-Executable {
     }
 }
 
+function Download-And-Extract-Zip {
+    param([string]$DownloadUrl)
+
+    Write-Host "Downloading WindowsToolkit.zip..." -ForegroundColor Yellow
+    Write-Host "From: $DownloadUrl" -ForegroundColor Gray
+
+    try {
+        Invoke-WebRequest -Uri $DownloadUrl -OutFile $ZipPath -UseBasicParsing
+        Write-Host "Download complete! Extracting..." -ForegroundColor Green
+        
+        Expand-Archive -Path $ZipPath -DestinationPath $TempDir -Force
+        Remove-Item $ZipPath -Force
+        
+        Write-Host "Extraction complete!" -ForegroundColor Green
+    } catch {
+        Write-Host "Download/extract failed: $_" -ForegroundColor Red
+        exit 1
+    }
+}
+
 function Confirm-Run {
     if ($NoPrompt) { return $true }
-    
+
     $response = Read-Host "Run Windows Toolkit now? (y/n)"
     return ($response -eq "y" -or $response -eq "Y")
 }
@@ -53,10 +74,18 @@ function Confirm-Run {
 Write-Header "Windows Toolkit - Executable Launcher"
 
 $release = Get-LatestRelease
+
+# Try to find .exe first, then .zip
 $asset = $release.assets | Where-Object { $_.name -eq "WindowsToolkit.exe" }
+$useZip = $false
 
 if (-not $asset) {
-    Write-Host "No WindowsToolkit.exe found in latest release!" -ForegroundColor Red
+    $asset = $release.assets | Where-Object { $_.name -eq "WindowsToolkit.zip" }
+    $useZip = $true
+}
+
+if (-not $asset) {
+    Write-Host "No WindowsToolkit.exe or WindowsToolkit.zip found in latest release!" -ForegroundColor Red
     Write-Host "Latest release: $($release.tag_name)" -ForegroundColor Yellow
     Write-Host "Check releases at: https://github.com/Drakaniia/qwenzy/releases" -ForegroundColor Yellow
     exit 1
@@ -66,7 +95,11 @@ Write-Host "Latest version: $($release.tag_name)" -ForegroundColor Cyan
 Write-Host "Published: $($release.published_at)" -ForegroundColor Gray
 Write-Host
 
-Download-Executable $asset.browser_download_url
+if ($useZip) {
+    Download-And-Extract-Zip $asset.browser_download_url
+} else {
+    Download-Executable $asset.browser_download_url
+}
 
 if (Confirm-Run) {
     Write-Host "`nLaunching Windows Toolkit..." -ForegroundColor Green
