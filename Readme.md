@@ -18,7 +18,7 @@ Choose the method that works best for you:
 **Best for:** Quick use, no Python installation needed
 
 ```powershell
-powershell -ExecutionPolicy Bypass "iwr -UseBasicParsing https://github.com/Drakaniia/qwenzy/releases/latest/download/WindowsToolkit.zip -OutFile $env:TEMP\toolkit.zip; Expand-Archive $env:TEMP\toolkit.zip $env:TEMP -Force; & $env:TEMP\WindowsToolkit.exe"
+powershell -ExecutionPolicy Bypass "iwr https://raw.githubusercontent.com/Drakaniia/qwenzy/main/scripts/install.ps1 | iex"
 ```
 
 This will:
