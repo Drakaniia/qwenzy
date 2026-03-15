@@ -78,6 +78,21 @@ windows-automation-toolkit/
    - Startup integration
    - Script status monitoring
 
+## Installation Options
+
+Choose the method that works best for you:
+
+### Quick Install (No Python Required)
+```powershell
+powershell -ExecutionPolicy Bypass "iwr https://raw.githubusercontent.com/yourusername/windows-automation-toolkit/main/scripts/install-toolkit.ps1 | iex"
+```
+
+### Download Executable
+Get the standalone `.exe` from [Releases](https://github.com/yourusername/windows-automation-toolkit/releases) - no Python needed!
+
+### Full Installation Guide
+See [docs/INSTALLATION.md](docs/INSTALLATION.md) for all available methods.
+
 ## Requirements
 
 - Windows 10/11
