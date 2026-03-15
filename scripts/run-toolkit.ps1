@@ -16,9 +16,9 @@ $PythonExe = "python.exe"
 function Write-Header {
     param([string]$Title)
     Clear-Host
-    Write-Host "╔══════════════════════════════════════════════════════════════╗" -ForegroundColor Cyan
-    Write-Host "║  $Title" -ForegroundColor Cyan
-    Write-Host "╚══════════════════════════════════════════════════════════════╝" -ForegroundColor Cyan
+    Write-Host "========================================================" -ForegroundColor Cyan
+    Write-Host "  $Title" -ForegroundColor Cyan
+    Write-Host "========================================================" -ForegroundColor Cyan
     Write-Host
 }
 
@@ -36,17 +36,17 @@ function Install-Python {
     Write-Host "Downloading Python installer..." -ForegroundColor Yellow
     $InstallerPath = Join-Path $TempDir "python-installer.exe"
     Invoke-WebRequest -Uri $PythonInstaller -OutFile $InstallerPath
-    
+
     Write-Host "Installing Python silently..." -ForegroundColor Yellow
     Start-Process -FilePath $InstallerPath -ArgumentList "/quiet", "InstallAllUsers=0", "PrependPath=1" -Wait
-    
+
     Remove-Item $InstallerPath -Force
     Write-Host "Python installed successfully!" -ForegroundColor Green
 }
 
 function Clone-Toolkit {
     $ToolkitPath = Join-Path $env:USERPROFILE "windows-automation-toolkit"
-    
+
     if (Test-Path $ToolkitPath) {
         Write-Host "Toolkit already exists. Updating..." -ForegroundColor Yellow
         Set-Location $ToolkitPath
@@ -56,7 +56,7 @@ function Clone-Toolkit {
         git clone $ToolkitRepo $ToolkitPath
         Set-Location $ToolkitPath
     }
-    
+
     return $ToolkitPath
 }
 
@@ -71,12 +71,12 @@ Write-Header "Windows Automation Toolkit Launcher"
 
 if (-not (Test-PythonInstalled)) {
     Write-Host "Python is not installed!" -ForegroundColor Red
-    
+
     if ($InstallPython -or $NoPrompt) {
         Install-Python
     } else {
         $response = Read-Host "Install Python now? (y/n)"
-        if ($response -eq 'y' -or $response -eq 'Y') {
+        if ($response -eq "y" -or $response -eq "Y") {
             Install-Python
         } else {
             Write-Host "Cannot continue without Python. Exiting." -ForegroundColor Red
