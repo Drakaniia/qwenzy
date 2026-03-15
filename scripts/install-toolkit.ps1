@@ -6,7 +6,7 @@ $ScriptUrl = "https://raw.githubusercontent.com/Drakaniia/qwenzy/main/scripts/ru
 $TempScript = Join-Path $env:TEMP "toolkit-launcher.ps1"
 
 Write-Host "Downloading toolkit launcher..." -ForegroundColor Cyan
-Invoke-WebRequest -Uri $ScriptUrl -OutFile $TempScript
+Invoke-WebRequest -Uri $ScriptUrl -OutFile $TempScript -UseBasicParsing
 
 Write-Host "Starting toolkit..." -ForegroundColor Green
 & $TempScript -NoPrompt:$NoPrompt
