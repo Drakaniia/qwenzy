@@ -1,11 +1,5 @@
 # Installation Guide - Windows Automation Toolkit
 
-> **⚠️ For Repository Owners:** Before deploying, replace `yourusername` with your actual GitHub username in:
-> - `scripts/run-toolkit.ps1`
-> - `scripts/install-toolkit.ps1`
-> - This documentation file
-> - `Readme.md`
-
 ## Choose Your Installation Method
 
 ### Method 1: PowerShell One-Liner (Recommended for Quick Use)
@@ -13,7 +7,7 @@
 **No Python required** - Automatically installs Python if needed.
 
 ```powershell
-powershell -ExecutionPolicy Bypass "iwr https://raw.githubusercontent.com/yourusername/windows-automation-toolkit/main/scripts/install-toolkit.ps1 | iex"
+powershell -ExecutionPolicy Bypass "iwr https://raw.githubusercontent.com/Drakaniia/qwenzy/main/scripts/install-toolkit.ps1 | iex"
 ```
 
 **Pros:**
@@ -31,7 +25,7 @@ powershell -ExecutionPolicy Bypass "iwr https://raw.githubusercontent.com/yourus
 
 **No Python required** - Bundled Python runtime.
 
-1. Download from [Releases](https://github.com/yourusername/windows-automation-toolkit/releases)
+1. Download from [Releases](https://github.com/Drakaniia/qwenzy/releases)
 2. Run `WindowsAutomationToolkit.exe`
 
 **Pros:**
@@ -70,8 +64,8 @@ powershell -ExecutionPolicy Bypass "iwr https://raw.githubusercontent.com/yourus
 **Requires Python 3.10+**
 
 ```bash
-git clone https://github.com/yourusername/windows-automation-toolkit
-cd windows-automation-toolkit
+git clone https://github.com/Drakaniia/qwenzy
+cd qwenzy
 pip install -r requirements.txt
 python main.py
 ```

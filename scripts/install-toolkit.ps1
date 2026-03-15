@@ -1,9 +1,8 @@
-# One-line installer: iwr https://yourdomain.com/install.ps1 | iex
-# TODO: Replace with your actual GitHub repository URL
+# One-line installer: iwr https://raw.githubusercontent.com/Drakaniia/qwenzy/main/scripts/install-toolkit.ps1 | iex
 
 param([switch]$NoPrompt)
 
-$ScriptUrl = "https://raw.githubusercontent.com/yourusername/windows-automation-toolkit/main/scripts/run-toolkit.ps1"
+$ScriptUrl = "https://raw.githubusercontent.com/Drakaniia/qwenzy/main/scripts/run-toolkit.ps1"
 $TempScript = Join-Path $env:TEMP "toolkit-launcher.ps1"
 
 Write-Host "Downloading toolkit launcher..." -ForegroundColor Cyan

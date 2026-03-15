@@ -4,33 +4,35 @@ This guide helps you configure and deploy the Windows Automation Toolkit for dis
 
 ## Pre-Deployment Configuration
 
-### 1. Update GitHub Repository URLs
+> **Note:** This repository is already configured with `Drakaniia/qwenzy`. Only update if you're forking.
+
+### 1. Update GitHub Repository URLs (If Forking)
 
 **Files to modify:**
 
 #### `scripts/run-toolkit.ps1` (Line 11)
 ```powershell
-# Change from:
-$ToolkitRepo = "https://github.com/yourusername/windows-automation-toolkit"
+# Current (Drakaniia/qwenzy):
+$ToolkitRepo = "https://github.com/Drakaniia/qwenzy"
 
-# To (replace with your actual username):
-$ToolkitRepo = "https://github.com/YOUR_USERNAME/windows-automation-toolkit"
+# Change to your fork:
+$ToolkitRepo = "https://github.com/YOUR_USERNAME/qwenzy"
 ```
 
 #### `scripts/install-toolkit.ps1` (Line 6)
 ```powershell
-# Change from:
-$ScriptUrl = "https://raw.githubusercontent.com/yourusername/windows-automation-toolkit/main/scripts/run-toolkit.ps1"
+# Current (Drakaniia/qwenzy):
+$ScriptUrl = "https://raw.githubusercontent.com/Drakaniia/qwenzy/main/scripts/run-toolkit.ps1"
 
-# To:
-$ScriptUrl = "https://raw.githubusercontent.com/YOUR_USERNAME/windows-automation-toolkit/main/scripts/run-toolkit.ps1"
+# Change to your fork:
+$ScriptUrl = "https://raw.githubusercontent.com/YOUR_USERNAME/qwenzy/main/scripts/run-toolkit.ps1"
 ```
 
 #### `docs/INSTALLATION.md` (Multiple locations)
-Replace all instances of `yourusername` with your GitHub username.
+Replace all instances of `Drakaniia/qwenzy` with your fork's path.
 
 #### `Readme.md` (Multiple locations)
-Replace all instances of `yourusername` with your GitHub username.
+Replace all instances of `Drakaniia/qwenzy` with your fork's path.
 
 ---
 
@@ -134,7 +136,7 @@ Test all three installation methods on a clean Windows 10/11 VM:
 
 1. **PowerShell One-Liner:**
    ```powershell
-   powershell -ExecutionPolicy Bypass "iwr https://raw.githubusercontent.com/YOUR_USERNAME/windows-automation-toolkit/main/scripts/install-toolkit.ps1 | iex"
+   powershell -ExecutionPolicy Bypass "iwr https://raw.githubusercontent.com/Drakaniia/qwenzy/main/scripts/install-toolkit.ps1 | iex"
    ```
 
 2. **Standalone Executable:**
@@ -158,12 +160,12 @@ git commit -m "Initial commit: Windows Automation Toolkit with Python alternativ
 
 ### Step 2: Create GitHub Repository
 1. Go to https://github.com/new
-2. Create a new repository named `windows-automation-toolkit`
+2. Create a new repository named `qwenzy`
 3. Follow the instructions to push your code
 
 ### Step 3: Push Your Code
 ```bash
-git remote add origin https://github.com/YOUR_USERNAME/windows-automation-toolkit.git
+git remote add origin https://github.com/Drakaniia/qwenzy.git
 git branch -M main
 git push -u origin main
 ```
@@ -211,11 +213,11 @@ After pushing a version tag:
 
 1. **PowerShell One-Liner** (on clean Windows VM):
    ```powershell
-   powershell -ExecutionPolicy Bypass "iwr https://raw.githubusercontent.com/YOUR_USERNAME/windows-automation-toolkit/main/scripts/install-toolkit.ps1 | iex"
+   powershell -ExecutionPolicy Bypass "iwr https://raw.githubusercontent.com/Drakaniia/qwenzy/main/scripts/install-toolkit.ps1 | iex"
    ```
 
 2. **Download from Releases:**
-   - Go to https://github.com/YOUR_USERNAME/windows-automation-toolkit/releases
+   - Go to https://github.com/Drakaniia/qwenzy/releases
    - Download the executable or installer
    - Test on clean Windows VM
 
@@ -332,6 +334,6 @@ After successful GitHub deployment, consider:
 ## Support
 
 For issues or questions:
-- Check existing issues: https://github.com/YOUR_USERNAME/windows-automation-toolkit/issues
+- Check existing issues: https://github.com/Drakaniia/qwenzy/issues
 - Create new issue with detailed description
 - Include Windows version and error messages
