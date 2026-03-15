@@ -150,3 +150,9 @@ Documents/AutoHotKey/*.ahk
 
 # Logs
 *.log
+
+# Git worktrees
+.worktrees/
+worktrees/
+launcher/
+installer/
