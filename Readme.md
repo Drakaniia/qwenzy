@@ -82,16 +82,53 @@ windows-automation-toolkit/
 
 Choose the method that works best for you:
 
-### Quick Install (No Python Required)
+### Option 1: Quick Install (Auto-installs Python)
+**Best for:** First-time users, no setup required
+
 ```powershell
 powershell -ExecutionPolicy Bypass "iwr -UseBasicParsing https://raw.githubusercontent.com/Drakaniia/qwenzy/main/scripts/install-toolkit.ps1 | iex"
 ```
 
-### Download Executable
-Get the standalone `.exe` from [Releases](https://github.com/Drakaniia/qwenzy/releases) - no Python needed!
+This will:
+- Install Python if not present
+- Clone the repository
+- Install dependencies automatically
+- Launch the toolkit
+
+### Option 2: Download Executable (Fastest, Recommended)
+**Best for:** Quick use, no Python installation, portable
+
+```powershell
+powershell -ExecutionPolicy Bypass "iwr -UseBasicParsing https://raw.githubusercontent.com/Drakaniia/qwenzy/main/scripts/run-exe.ps1 | iex"
+```
+
+This will:
+- Download the latest `.exe` from Releases
+- Launch the toolkit immediately
+- No Python required, no installation needed
+
+Or download manually from [Releases](https://github.com/Drakaniia/qwenzy/releases)
+
+### Option 3: Build Executable Yourself
+**Best for:** Custom builds, developers
+
+```bash
+pip install -r requirements.txt
+powershell -ExecutionPolicy Bypass ".\scripts\build-exe.ps1"
+```
+
+### Option 4: Manual Installation
+**Best for:** Developers, contributors
+
+```bash
+git clone https://github.com/Drakaniia/qwenzy.git
+cd qwenzy
+pip install -r requirements.txt
+python main.py
+```
 
 ### Full Installation Guide
-See [docs/INSTALLATION.md](docs/INSTALLATION.md) for all available methods.
+See [docs/INSTALLATION.md](docs/INSTALLATION.md) for detailed instructions.
 
 ## Requirements
 
