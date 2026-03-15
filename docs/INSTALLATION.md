@@ -1,5 +1,11 @@
 # Installation Guide - Windows Automation Toolkit
 
+> **⚠️ For Repository Owners:** Before deploying, replace `yourusername` with your actual GitHub username in:
+> - `scripts/run-toolkit.ps1`
+> - `scripts/install-toolkit.ps1`
+> - This documentation file
+> - `Readme.md`
+
 ## Choose Your Installation Method
 
 ### Method 1: PowerShell One-Liner (Recommended for Quick Use)

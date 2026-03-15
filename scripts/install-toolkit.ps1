@@ -1,4 +1,5 @@
 # One-line installer: iwr https://yourdomain.com/install.ps1 | iex
+# TODO: Replace with your actual GitHub repository URL
 
 param([switch]$NoPrompt)
 

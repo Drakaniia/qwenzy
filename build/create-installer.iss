@@ -3,10 +3,11 @@
 
 #define MyAppName "Windows Automation Toolkit"
 #define MyAppVersion "2.0.1"
-#define MyAppPublisher "Your Name"
+#define MyAppPublisher "Your Name"  ; TODO: Replace with your name or organization
 #define MyAppExeName "WindowsAutomationToolkit.exe"
 
 [Setup]
+; TODO: Generate a new unique AppId GUID using: [Guid]::NewGuid().ToString() in PowerShell
 AppId={{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
@@ -17,6 +18,7 @@ AllowNoIcons=yes
 LicenseFile=..\LICENSE
 OutputDir=..\installer
 OutputBaseFilename=WindowsAutomationToolkit-Setup
+; TODO: Create assets/toolkit.ico or remove this line
 SetupIconFile=..\assets\toolkit.ico
 Compression=lzma
 SolidCompression=yes

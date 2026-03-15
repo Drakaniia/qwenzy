@@ -7,6 +7,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+# TODO: Replace with your actual GitHub repository URL
 $ToolkitRepo = "https://github.com/yourusername/windows-automation-toolkit"
 $PythonInstaller = "https://www.python.org/ftp/python/3.11.9/python-3.11.9-amd64.exe"
 $TempDir = $env:TEMP

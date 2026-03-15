@@ -54,5 +54,6 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon='../assets/toolkit.ico',  # Optional: add icon later
+    # TODO: Create assets/toolkit.ico or remove this line
+    icon='../assets/toolkit.ico',
 )
