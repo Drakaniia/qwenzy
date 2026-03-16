@@ -20,14 +20,22 @@ class AppInstaller:
         while True:
             self.system.clear_screen()
             self.system.print_header("Essential Apps Installer")
-            
-            # Check if winget is available
-            winget_available = self.check_winget_available()
-            if not winget_available:
-                print(" Winget is not available. Please install Windows Package Manager first.")
-                self.system.pause_execution()
-                return
-            
+
+            # Check if any package manager is available
+            winget_available = self.system.check_winget_available()
+            choco_available = self.system.check_chocolatey_available()
+
+            if not winget_available and not choco_available:
+                # No package manager available, try to install one
+                manager, was_installed = self.system.ensure_package_manager()
+                if manager is None:
+                    print(" Operation cancelled. No package manager available.")
+                    self.system.pause_execution()
+                    return
+                # After installation, continue
+                winget_available = self.system.check_winget_available()
+                choco_available = self.system.check_chocolatey_available()
+
             # Create options dynamically
             options = {}
             for i, app in enumerate(self.apps, 1):

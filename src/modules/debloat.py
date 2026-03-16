@@ -135,29 +135,60 @@ class WindowsDebloat:
         self.system.clear_screen()
         self.system.print_header("Windows Memory Cleaner Installation")
 
+        # Check if any package manager is available
+        winget_available = self.system.check_winget_available()
+        choco_available = self.system.check_chocolatey_available()
+
+        if not winget_available and not choco_available:
+            # No package manager available, try to install one
+            manager, was_installed = self.system.ensure_package_manager()
+            if manager is None:
+                print(" Installation cancelled. No package manager available.")
+                self.system.pause_execution()
+                return
+            # After installation, continue with the available manager
+
+        # Re-check availability after potential installation
+        winget_available = self.system.check_winget_available()
+        choco_available = self.system.check_chocolatey_available()
+
         print(" Choose installation method:")
         print("     ----------------------")
-        print("     [1] Chocolatey (choco install winmemorycleaner)")
-        print("     [2] Winget (winget install IgorMundstein.WinMemoryCleaner)")
+
+        options = []
+        if choco_available:
+            options.append(("1", "choco"))
+            print("     [1] Chocolatey (choco install winmemorycleaner)")
+        if winget_available:
+            options.append(("2", "winget"))
+            print("     [2] Winget (winget install IgorMundstein.WinMemoryCleaner)")
+
+        if not options:
+            print(" No package managers available!")
+            self.system.pause_execution()
+            return
+
         print("     [0] Cancel")
         print()
 
-        choice = input(" Enter your choice (0-2): ").strip()
+        choice = input(" Enter your choice (0-{}): ".format(len(options))).strip()
 
-        if choice == "1":
-            cmd = script_data["install_methods"]["choco"]
-            print(f" Running: {cmd}")
-            self.system.run_command(cmd)
-            print(" Windows Memory Cleaner installation completed")
-        elif choice == "2":
-            cmd = script_data["install_methods"]["winget"]
-            print(f" Running: {cmd}")
-            self.system.run_command(cmd)
-            print(" Windows Memory Cleaner installation completed")
-        elif choice == "0":
+        if choice == "0":
             print(" Installation cancelled")
         else:
-            print(" Invalid option")
+            selected_method = None
+            for opt_key, method in options:
+                if choice == opt_key:
+                    selected_method = method
+                    break
+
+            if selected_method:
+                cmd = script_data["install_methods"][selected_method]
+                print(f" Running: {cmd}")
+                self.system.run_command(cmd)
+                print(" Windows Memory Cleaner installation completed")
+            else:
+                print(" Invalid option")
 
         self.system.pause_execution()
 
