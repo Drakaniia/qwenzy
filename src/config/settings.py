@@ -29,6 +29,16 @@ POWERSHELL_SCRIPTS = {
             "url": "https://get.activated.win",
             "description": "Windows activation script"
         }
+    },
+    "memory_cleaner": {
+        "winmemorycleaner": {
+            "name": "Windows Memory Cleaner",
+            "description": "Open-source memory cleaner for Windows",
+            "install_methods": {
+                "choco": "choco install winmemorycleaner",
+                "winget": "winget install IgorMundstein.WinMemoryCleaner"
+            }
+        }
     }
 }
 
