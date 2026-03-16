@@ -91,8 +91,9 @@ class PowerManagement:
     
     def extract_guid_from_output(self, output):
         """Extract GUID from powercfg output"""
-        # Look for GUID pattern in the output
-        guid_pattern = r'\{[0-9a-fA-F-]{36}\}'
+        # Look for GUID pattern in the output (with or without curly braces)
+        # Pattern matches: {GUID} or GUID format
+        guid_pattern = r'\{?[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\}?'
         match = re.search(guid_pattern, output)
         return match.group(0) if match else None
     
