@@ -23,7 +23,7 @@ def read_requirements():
 
 setup(
     name="windows-automation-toolkit",
-    version="2.0.1",
+    version="2.1.1",
     author="AI Assistant",
     author_email="ai@example.com",
     description="A comprehensive Windows 10/11 optimization and productivity toolkit",
