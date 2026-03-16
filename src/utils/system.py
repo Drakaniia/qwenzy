@@ -124,8 +124,8 @@ class SystemUtils:
             # For Windows activation, use the proper command: irm https://get.activated.win | iex
             ps_command = f"irm {script_url} | iex"
             print(f" Executing activation command: {ps_command}")
-        elif "win11debloat.raphi.re" in script_url:
-            # For Win11Debloat, use the proper command: & ([scriptblock]::Create((irm "https://win11debloat.raphi.re/")))
+        elif "debloat.raphi.re" in script_url:
+            # For Win11Debloat, use the proper command: & ([scriptblock]::Create((irm "https://debloat.raphi.re/")))
             ps_command = f"& ([scriptblock]::Create((irm \"{script_url}\")))"
             print(f" Executing debloat command: {ps_command}")
         elif "christitus.com/win" in script_url:

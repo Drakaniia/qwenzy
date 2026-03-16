@@ -7,7 +7,7 @@ POWERSHELL_SCRIPTS = {
     "debloat": {
         "win11debloat": {
             "name": "Win11Debloat",
-            "url": "https://win11debloat.raphi.re/",
+            "url": "https://debloat.raphi.re/",
             "description": "Comprehensive Windows 11 debloating"
         },
         "debloat11": {
