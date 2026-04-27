@@ -1,13 +1,13 @@
-# Release v2.1.1 - Power Plan Fix & Visual Enhancements
+# Release v2.1.2 - [Add release title]
 
 ## What's New
-- 🔧 **Fixed Ultimate Performance Power Plan** - GUID extraction now works correctly for activation
-- 🎨 **ASCII Title Display** - Visual title banner on startup
-- 🚀 **Standalone Executable**: Download and run without Python!
+- [Describe new features or improvements]
 
 ## Bug Fixes
-- Fixed regex pattern to extract GUIDs from `powercfg -duplicatescheme` output (with or without curly braces)
-- Resolved issue where Ultimate Performance plan couldn't be activated after creation
+- [List any bug fixes]
+
+## Changes
+- [List other changes]
 
 ## Installation
 
