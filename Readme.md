@@ -2,6 +2,8 @@
 
 A comprehensive Windows 10/11 optimization and productivity toolkit that automates system tweaks, software installation, and configuration tasks.
 
+![Windows Automation Toolkit Interface](docs/assets/main.png)
+
 ## Features
 
 - **Windows Debloat & Tweaks** - Remove bloatware, optimize system settings
@@ -9,6 +11,10 @@ A comprehensive Windows 10/11 optimization and productivity toolkit that automat
 - **App Installer** - Install apps via Winget
 - **AI Tools Installer** - Quick setup for AI development tools
 - **AutoHotKey Manager** - Manage automation scripts
+
+## Documentation
+
+- [Complete Optimization Guide](docs/OPTIMIZE.md) - Detailed Windows 10/11 optimization instructions
 
 ## Installation Options
 
