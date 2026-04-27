@@ -493,18 +493,30 @@ class SystemUtils:
     def print_header(self, title, subtitle=""):
         """Print a formatted header"""
         self.clear_screen()
-        border = "╔" + "═" * (len(title) + 4) + "╗"
-        footer = "╚" + "═" * (len(title) + 4) + "╝"
         
-        print(border)
-        print(f"║  {title}  ║")
-        if subtitle:
-            subtitle_border = "╠" + "═" * (len(subtitle) + 4) + "╣"
-            print(subtitle_border)
-            print(f"║  {subtitle}  ║")
-        print(footer)
-        print(f"Running as: {'Administrator' if self.is_admin else 'User'}")
+        # Add padding on top
         print()
+        
+        # Display ASCII title centered
+        ascii_title = [
+            " ██████╗ ██╗    ██╗███████╗███╗   ██╗███████╗██╗   ██╗",
+            "██╔═══██╗██║    ██║██╔════╝████╗  ██║╚══███╔╝╚██╗ ██╔╝",
+            "██║   ██║██║ █╗ ██║█████╗  ██╔██╗ ██║  ███╔╝  ╚████╔╝ ",
+            "██║▄▄ ██║██║███╗██║██╔══╝  ██║╚██╗██║ ███╔╝    ╚██╔╝  ",
+            "╚██████╔╝╚███╔███╔╝███████╗██║ ╚████║███████╗   ██║   ",
+            " ╚══▀▀═╝  ╚══╝╚══╝ ╚══════╝╚═╝  ╚═══╝╚══════╝   ╚═╝   ",
+            "                                                      "
+        ]
+        
+        # Center each line of the ASCII title
+        for line in ascii_title:
+            print(line.center(100))
+        print()
+        
+        # Display subtitle if provided
+        if subtitle:
+            print(subtitle.center(100))
+            print()
     
     def print_menu(self, title, options):
         """Print a formatted menu with consistent left padding for better appearance"""
