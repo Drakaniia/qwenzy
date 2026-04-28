@@ -1,13 +1,17 @@
-# Release v2.1.2 - [Add release title]
+# Release v2.1.2 - Windows Toolkit Executable
 
 ## What's New
-- [Describe new features or improvements]
+- 🚀 **Standalone Executable**: Download and run without Python!
+- 🔧 Fixed installation scripts to work with GitHub releases
+- 📦 Added both .exe and .zip distribution formats
 
 ## Bug Fixes
-- [List any bug fixes]
+- Fixed install.ps1 script to download from proper GitHub releases URL
+- Resolved missing release assets issue
 
 ## Changes
-- [List other changes]
+- Created GitHub release v2.1.2-release with WindowsToolkit.exe and WindowsToolkit.zip
+- Updated build process to generate proper release assets
 
 ## Installation
 
