@@ -1,10 +1,10 @@
 ; build/create-installer.iss
 ; Inno Setup script for Windows Automation Toolkit
 
-#define MyAppName "Windows Automation Toolkit"
-#define MyAppVersion "2.0.1"
-#define MyAppPublisher "Your Name"  ; TODO: Replace with your name or organization
-#define MyAppExeName "WindowsAutomationToolkit.exe"
+#define MyAppName "Windows Toolkit"
+#define MyAppVersion "2.1.2"
+#define MyAppPublisher "Drakaniia"  ; TODO: Replace with your name or organization
+#define MyAppExeName "WindowsToolkit.exe"
 
 [Setup]
 ; TODO: Generate a new unique AppId GUID using: [Guid]::NewGuid().ToString() in PowerShell
@@ -17,7 +17,7 @@ DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
 LicenseFile=..\LICENSE
 OutputDir=..\installer
-OutputBaseFilename=WindowsAutomationToolkit-Setup
+OutputBaseFilename=WindowsToolkit-Setup
 ; TODO: Create assets/toolkit.ico or remove this line
 SetupIconFile=..\assets\toolkit.ico
 Compression=lzma
@@ -34,7 +34,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "startupicon"; Description: "{cm:AutoStartProgram,{#MyAppName}}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "..\launcher\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\build\dist\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\README.md"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\LICENSE"; DestDir: "{app}"; Flags: ignoreversion
 ; Include any additional files needed

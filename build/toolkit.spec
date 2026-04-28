@@ -41,7 +41,7 @@ exe = EXE(
     a.zipfiles,
     a.datas,
     [],
-    name='WindowsAutomationToolkit',
+    name='WindowsToolkit',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -54,6 +54,6 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    # TODO: Create assets/toolkit.ico or remove this line
-    icon='../assets/toolkit.ico',
+    # Icon removed - TODO: Create assets/toolkit.ico and uncomment
+    # icon='../assets/toolkit.ico',
 )
