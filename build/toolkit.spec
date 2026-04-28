@@ -41,7 +41,7 @@ exe = EXE(
     a.zipfiles,
     a.datas,
     [],
-    name='WindowsToolkit',
+    name='WindowsAutomationToolkit',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -57,3 +57,6 @@ exe = EXE(
     # Icon removed - TODO: Create assets/toolkit.ico and uncomment
     # icon='../assets/toolkit.ico',
 )
+
+# Note: The executable name is set to "WindowsAutomationToolkit" to match the class name
+# and all documentation. The actual filename will be WindowsAutomationToolkit.exe

@@ -37,8 +37,8 @@ def build_executable():
     ], check=True)
     
     print(f"\nExecutable built successfully!")
-    print(f"  Location: {os.path.join(output_dir, 'WindowsToolkit.exe')}")
-    print(f"  Size: {os.path.getsize(os.path.join(output_dir, 'WindowsToolkit.exe')) / (1024*1024):.1f} MB")
+    print(f"  Location: {os.path.join(output_dir, 'WindowsAutomationToolkit.exe')}")
+    print(f"  Size: {os.path.getsize(os.path.join(output_dir, 'WindowsAutomationToolkit.exe')) / (1024*1024):.1f} MB")
 
 if __name__ == '__main__':
     build_executable()

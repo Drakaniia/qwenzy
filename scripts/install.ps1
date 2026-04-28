@@ -5,7 +5,7 @@ $ErrorActionPreference = "Stop"
 $ReleaseUrl = "https://github.com/Drakaniia/qwenzy/releases/latest/download/WindowsToolkit.zip"
 $TempDir = $env:TEMP
 $ZipPath = Join-Path $TempDir "WindowsToolkit.zip"
-$ExePath = Join-Path $TempDir "WindowsToolkit.exe"
+$ExePath = Join-Path $TempDir "WindowsAutomationToolkit.exe"
 
 Write-Host "========================================================" -ForegroundColor Cyan
 Write-Host "  Windows Toolkit - Downloading..." -ForegroundColor Cyan

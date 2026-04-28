@@ -10,7 +10,7 @@
 - Resolved missing release assets issue
 
 ## Changes
-- Created GitHub release v2.1.2-release with WindowsToolkit.exe and WindowsToolkit.zip
+- Created GitHub release v2.1.2-release with WindowsAutomationToolkit.exe and WindowsAutomationToolkit.zip
 - Updated build process to generate proper release assets
 
 ## Installation

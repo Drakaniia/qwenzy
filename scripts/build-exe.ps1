@@ -46,12 +46,12 @@ if ($LASTEXITCODE -eq 0) {
     Write-Host "  Build Successful!" -ForegroundColor Green
     Write-Host "========================================================" -ForegroundColor Green
     Write-Host
-    Write-Host "Executable created: dist\WindowsToolkit.exe" -ForegroundColor Cyan
+    Write-Host "Executable created: dist\WindowsAutomationToolkit.exe" -ForegroundColor Cyan
     Write-Host
     Write-Host "You can now:" -ForegroundColor Yellow
     Write-Host "  1. Distribute the .exe file directly" -ForegroundColor White
     Write-Host "  2. Upload to GitHub Releases" -ForegroundColor White
-    Write-Host "  3. Test by running: .\dist\WindowsToolkit.exe" -ForegroundColor White
+    Write-Host "  3. Test by running: .\dist\WindowsAutomationToolkit.exe" -ForegroundColor White
     Write-Host
 } else {
     Write-Host "`nBuild failed! Check the error messages above." -ForegroundColor Red

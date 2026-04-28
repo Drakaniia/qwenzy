@@ -6,7 +6,7 @@ param([switch]$NoPrompt)
 $ErrorActionPreference = "Stop"
 $ReleaseUrl = "https://api.github.com/repos/Drakaniia/qwenzy/releases/latest"
 $TempDir = $env:TEMP
-$ExePath = Join-Path $TempDir "WindowsToolkit.exe"
+$ExePath = Join-Path $TempDir "WindowsAutomationToolkit.exe"
 $ZipPath = Join-Path $TempDir "WindowsToolkit.zip"
 
 function Write-Header {
@@ -31,7 +31,7 @@ function Get-LatestRelease {
 function Download-Executable {
     param([string]$DownloadUrl)
 
-    Write-Host "Downloading WindowsToolkit.exe..." -ForegroundColor Yellow
+    Write-Host "Downloading WindowsAutomationToolkit.exe..." -ForegroundColor Yellow
     Write-Host "From: $DownloadUrl" -ForegroundColor Gray
 
     try {
@@ -76,7 +76,7 @@ Write-Header "Windows Toolkit - Executable Launcher"
 $release = Get-LatestRelease
 
 # Try to find .exe first, then .zip
-$asset = $release.assets | Where-Object { $_.name -eq "WindowsToolkit.exe" }
+$asset = $release.assets | Where-Object { $_.name -eq "WindowsAutomationToolkit.exe" }
 $useZip = $false
 
 if (-not $asset) {
@@ -85,7 +85,7 @@ if (-not $asset) {
 }
 
 if (-not $asset) {
-    Write-Host "No WindowsToolkit.exe or WindowsToolkit.zip found in latest release!" -ForegroundColor Red
+    Write-Host "No WindowsAutomationToolkit.exe or WindowsAutomationToolkit.zip found in latest release!" -ForegroundColor Red
     Write-Host "Latest release: $($release.tag_name)" -ForegroundColor Yellow
     Write-Host "Check releases at: https://github.com/Drakaniia/qwenzy/releases" -ForegroundColor Yellow
     exit 1
