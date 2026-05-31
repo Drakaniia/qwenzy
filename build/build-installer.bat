@@ -15,7 +15,7 @@ if not exist "%ISCC%" (
 if %ERRORLEVEL% EQU 0 (
     echo.
     echo ✓ Installer built successfully!
-    echo   Location: installer\WindowsToolkit-Setup.exe
+    echo   Location: installer\WindowsAutomationToolkit-Setup.exe
 ) else (
     echo.
     echo ✗ Build failed!

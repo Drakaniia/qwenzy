@@ -30,7 +30,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: toolkit-executable
-        path: build/dist/WindowsToolkit.exe
+        path: launcher/WindowsAutomationToolkit.exe
     
   build-installer:
     needs: build-executable
@@ -43,7 +43,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: toolkit-executable
-        path: build/dist/
+        path: launcher/
     
     - name: Build installer
       run: |
@@ -53,7 +53,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: toolkit-installer
-        path: installer/WindowsToolkit-Setup.exe
+        path: installer/WindowsAutomationToolkit-Setup.exe
     
   create-release:
     needs: [build-executable, build-installer]
@@ -69,8 +69,8 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         files: |
-          toolkit-executable/WindowsToolkit.exe
-          toolkit-installer/WindowsToolkit-Setup.exe
+          toolkit-executable/WindowsAutomationToolkit.exe
+          toolkit-installer/WindowsAutomationToolkit-Setup.exe
         body: |
           ## Changes
           - Standalone executable (no Python required)

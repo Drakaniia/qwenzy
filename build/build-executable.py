@@ -12,14 +12,14 @@ def build_executable():
     # Get paths
     script_dir = os.path.dirname(os.path.abspath(__file__))
     root_dir = os.path.dirname(script_dir)
-    output_dir = os.path.join(script_dir, 'dist')
+    output_dir = os.path.join(root_dir, 'launcher')
     
     # Create output directory
     os.makedirs(output_dir, exist_ok=True)
     
     # Clean previous builds
     build_dir = os.path.join(script_dir, 'build')
-    dist_dir = os.path.join(script_dir, 'dist')
+    dist_dir = output_dir
     
     if os.path.exists(build_dir):
         shutil.rmtree(build_dir)
@@ -33,6 +33,10 @@ def build_executable():
     subprocess.run([
         sys.executable, '-m', 'PyInstaller',
         '--clean',
+        '--distpath',
+        output_dir,
+        '--workpath',
+        build_dir,
         spec_file
     ], check=True)
     
