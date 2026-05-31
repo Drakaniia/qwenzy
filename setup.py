@@ -45,6 +45,9 @@ setup(
     ],
     python_requires=">=3.10",
     install_requires=read_requirements(),
+    package_data={
+        "src.tui": ["*.tcss"],
+    },
     entry_points={
         "console_scripts": [
             "windows-toolkit=main:main",

@@ -1,0 +1,222 @@
+Screen {
+    background: #0b1016;
+    color: #e6edf3;
+}
+
+Header {
+    background: #111923;
+    color: #e6edf3;
+}
+
+Footer {
+    background: #111923;
+    color: #9fb0c3;
+}
+
+#app-shell {
+    layout: vertical;
+    height: 1fr;
+    padding: 0 1;
+}
+
+#hero {
+    height: 5;
+    padding: 0 1 1 1;
+    border-bottom: solid #2a3a4f;
+}
+
+#hero-title {
+    text-style: bold;
+    color: #6cb6ff;
+    height: 1;
+    content-align: left middle;
+}
+
+#hero-subtitle {
+    color: #9fb0c3;
+    height: 2;
+}
+
+#workspace {
+    height: 1fr;
+    layout: horizontal;
+    padding-top: 1;
+}
+
+#status-panel {
+    width: 24;
+    min-width: 20;
+    height: 1fr;
+    margin-right: 1;
+    padding: 1;
+    border: solid #2a3a4f;
+    background: #111923;
+}
+
+#main-panel {
+    width: 1fr;
+    min-width: 1;
+    height: 1fr;
+}
+
+.panel-title {
+    text-style: bold;
+    color: #6cb6ff;
+    height: 1;
+    margin-bottom: 1;
+}
+
+.status-card {
+    height: 4;
+    margin-bottom: 1;
+    padding: 0 1;
+    border-left: thick #6cb6ff;
+    background: #162232;
+    color: #e6edf3;
+}
+
+#keyboard-hint {
+    color: #9fb0c3;
+    margin-top: 1;
+}
+
+#toolbar {
+    height: 3;
+    margin-bottom: 1;
+}
+
+#search {
+    width: 1fr;
+    margin-right: 1;
+}
+
+#run-action {
+    width: 12;
+    margin-right: 1;
+}
+
+#refresh-actions {
+    width: 12;
+}
+
+#sections {
+    height: 1fr;
+    border: solid #2a3a4f;
+    background: #111923;
+}
+
+.section-summary {
+    height: 2;
+    padding: 0 1;
+    color: #9fb0c3;
+    background: #111923;
+}
+
+.action-table {
+    height: 1fr;
+    border-top: solid #2a3a4f;
+}
+
+DataTable {
+    background: #111923;
+    color: #e6edf3;
+    scrollbar-background: #111923;
+    scrollbar-color: #2a3a4f;
+    scrollbar-color-hover: #6cb6ff;
+}
+
+DataTable:focus {
+    border: heavy #6cb6ff;
+}
+
+DataTable > .datatable--header {
+    background: #17324b;
+    color: #e6edf3;
+    text-style: bold;
+}
+
+Input {
+    border: solid #2a3a4f;
+    background: #111923;
+    color: #e6edf3;
+}
+
+Input:focus {
+    border: heavy #6cb6ff;
+}
+
+Button {
+    min-width: 10;
+}
+
+Button:focus {
+    text-style: bold;
+}
+
+#activity-log {
+    height: 8;
+    min-height: 5;
+    margin-top: 1;
+    padding: 1;
+    border: solid #2a3a4f;
+    background: #090d12;
+    color: #9fb0c3;
+}
+
+#loading {
+    height: 3;
+    content-align: center middle;
+}
+
+.hidden {
+    display: none;
+}
+
+ConfirmActionScreen {
+    align: center middle;
+}
+
+#confirm-dialog {
+    width: 64;
+    height: auto;
+    padding: 1 2;
+    border: thick #ff7b72;
+    background: #111923;
+}
+
+#confirm-title {
+    text-style: bold;
+    color: #ff7b72;
+    height: 1;
+}
+
+#confirm-action {
+    margin-top: 1;
+    text-style: bold;
+    color: #e6edf3;
+}
+
+#confirm-description {
+    color: #9fb0c3;
+    margin-top: 1;
+}
+
+#confirm-target {
+    margin-top: 1;
+    color: #f2cc60;
+}
+
+#confirm-buttons {
+    height: 3;
+    margin-top: 1;
+    align: right middle;
+}
+
+#confirm-cancel {
+    width: 12;
+    margin-right: 1;
+}
+
+#confirm-run {
+    width: 12;
+}
