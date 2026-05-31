@@ -191,16 +191,30 @@ class WindowsToolkitApp(App[None]):
 
         action = self.service.find_action(self.selected_action_id)
         if action.requires_confirmation:
-            confirmed = await self.push_screen_wait(ConfirmActionScreen(action))
+            self._confirm_action(action)
+            return
+
+        await self._execute_action(action)
+
+    def _confirm_action(self, action: ToolkitAction) -> None:
+        async def handle_confirmation(confirmed: bool | None) -> None:
             if not confirmed:
                 self._log(f"Cancelled: {action.title}")
                 return
+            await self._execute_action(action)
 
+        self.push_screen(ConfirmActionScreen(action), callback=handle_confirmation)
+
+    async def _execute_action(self, action: ToolkitAction) -> None:
+        if self._busy:
+            return
         self._set_busy(True)
         self._log(f"Running: {action.title}")
-        result = await asyncio.to_thread(self.service.run_action, action.id)
-        self._handle_result(result)
-        self._set_busy(False)
+        try:
+            result = await asyncio.to_thread(self.service.run_action, action.id)
+            self._handle_result(result)
+        finally:
+            self._set_busy(False)
 
     def _handle_result(self, result: ExecutionResult) -> None:
         status = "OK" if result.success else "FAILED"

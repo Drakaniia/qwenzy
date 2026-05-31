@@ -498,6 +498,21 @@ Write-Host "Restart Windows to let all service, registry, and power changes take
         return "\n".join([prelude.strip(), *selected_blocks, footer.strip(), ""])
 
     def _run_windows_optimization(self, action: ToolkitAction) -> ExecutionResult:
+        if not getattr(self.system, "is_admin", False):
+            return ExecutionResult(
+                action_id=action.id,
+                title=action.title,
+                success=False,
+                message=f"{action.title} requires Administrator privileges",
+                details=(
+                    "Restart this app from an elevated PowerShell or Windows Terminal "
+                    "session, then run the action again. This optimization uses "
+                    "admin-only operations including restore points, HKLM registry "
+                    "writes, netsh TCP settings, network adapter properties, powercfg, "
+                    "and Windows service changes."
+                ),
+            )
+
         script = self.build_optimization_script(action)
         temp_script_path = ""
 
