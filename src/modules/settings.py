@@ -27,8 +27,7 @@ class WindowsSettings:
                 "1": {"title": "Performance Options", "command": "performance"},
                 "2": {"title": "System Properties", "command": "system"},
                 "3": {"title": "Power Options", "command": "power"},
-                "4": {"title": "Programs and Features", "command": "programs"},
-                "5": {"title": "Network Connections", "command": "network"},
+                "4": {"title": "Network Connections", "command": "network"},
                 "0": {"title": "Back to Main Menu", "command": "back"}
             }
             
@@ -98,10 +97,6 @@ class WindowsSettings:
     def open_power_options(self):
         """Open Power Options"""
         return self.run_command("power")
-    
-    def open_programs_features(self):
-        """Open Programs and Features"""
-        return self.run_command("programs")
     
     def open_network_connections(self):
         """Open Network Connections"""

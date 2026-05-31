@@ -47,24 +47,67 @@ WINDOWS_COMMANDS = {
     "performance": "SystemPropertiesPerformance",
     "system": "sysdm.cpl",
     "power": "powercfg.cpl",
-    "programs": "appwiz.cpl",
     "network": "ncpa.cpl"
 }
 
-# Essential Apps Configuration
-ESSENTIAL_APPS = [
-    {"id": "Microsoft.VisualStudioCode", "name": "Visual Studio Code", "versions": ["latest"], "download_url": "https://code.visualstudio.com/download"},
-    {"id": "Yandex.Browser", "name": "Yandex Browser", "versions": ["latest"], "download_url": "https://browser.yandex.com/download/"},
-    {"id": "OpenJS.NodeJS", "name": "Node.js LTS", "versions": ["latest", "18.x", "20.x"], "download_url": "https://nodejs.org/en/download"},
-    {"id": "Python.Python.3", "name": "Python 3", "versions": ["latest", "3.11", "3.12"], "download_url": "https://www.python.org/downloads/"},
-    {"id": "Git.Git", "name": "Git", "versions": ["latest"], "download_url": "https://git-scm.com/download/win"},
-    {"id": "AutoHotkey.AutoHotkey", "name": "AutoHotKey", "versions": ["latest"], "download_url": "https://www.autohotkey.com/download/"}
-]
-
-# Terminal AI Tools Configuration
-AI_TOOLS = [
-    {"package": "opencode-ai", "name": "OpenCode AI"},
-    {"package": "@qwen-code/qwen-code@latest", "name": "Qwen Code CLI"}
+# Automated Windows Optimization Actions
+WINDOWS_OPTIMIZATION_ACTIONS = [
+    {
+        "id": "full",
+        "title": "Run Full Windows Optimization",
+        "target": "Windows 10/11 automated optimization",
+        "description": "Apply the complete automated optimization set from OPTIMIZE.md.",
+        "groups": ["restore_point", "cleanup", "network", "performance", "privacy", "interface", "services"],
+        "risk": "High"
+    },
+    {
+        "id": "cleanup",
+        "title": "Clean Temporary and Update Caches",
+        "target": "Temp, Prefetch, Windows Update, Store, NVIDIA caches",
+        "description": "Remove disposable cache files that OPTIMIZE.md previously required cleaning manually.",
+        "groups": ["restore_point", "cleanup"],
+        "risk": "Medium"
+    },
+    {
+        "id": "network",
+        "title": "Apply Network Throughput Tweaks",
+        "target": "TCP autotuning, CTCP, QoS, network adapter power saving",
+        "description": "Apply the documented TCP/IP, QoS, and adapter energy-saving adjustments.",
+        "groups": ["restore_point", "network"],
+        "risk": "Medium"
+    },
+    {
+        "id": "performance",
+        "title": "Apply System Performance Tweaks",
+        "target": "Power, Game Mode, Storage Sense, remote access, mouse and keyboard",
+        "description": "Apply automated performance, power, gaming, peripheral, and background-activity settings.",
+        "groups": ["restore_point", "performance"],
+        "risk": "High"
+    },
+    {
+        "id": "privacy",
+        "title": "Apply Privacy and Telemetry Tweaks",
+        "target": "Telemetry, advertising ID, activity history, location, app permissions",
+        "description": "Disable privacy-sensitive Windows features and app permissions covered in OPTIMIZE.md.",
+        "groups": ["restore_point", "privacy"],
+        "risk": "High"
+    },
+    {
+        "id": "interface",
+        "title": "Apply Explorer and Interface Tweaks",
+        "target": "Explorer, Start, taskbar, tips, suggestions, accessibility launchers",
+        "description": "Apply File Explorer, Start menu, taskbar, notification suggestion, and accessibility tweaks.",
+        "groups": ["restore_point", "interface"],
+        "risk": "Medium"
+    },
+    {
+        "id": "services",
+        "title": "Disable Unnecessary Services",
+        "target": "Telemetry, Xbox, Hyper-V, sensors, smart card, touch, indexing, SysMain",
+        "description": "Disable optional background services listed in OPTIMIZE.md plus common extra optimization services.",
+        "groups": ["restore_point", "services"],
+        "risk": "High"
+    }
 ]
 
 # Power Plan Configuration
@@ -131,9 +174,8 @@ UI_CONFIG = {
         "1": {"title": "Windows Debloat & Tweaks"},
         "2": {"title": "Windows Settings & Run Commands"},
         "3": {"title": "Unlock Ultimate Performance"},
-        "4": {"title": "Install Essential Apps"},
-        "5": {"title": "Install Terminal AI Tools"},
-        "6": {"title": "Setup AutoHotKey"},
+        "4": {"title": "Automated Windows Optimization"},
+        "5": {"title": "Setup AutoHotKey"},
         "0": {"title": "Exit"}
     }
 }

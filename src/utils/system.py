@@ -241,11 +241,11 @@ class SystemUtils:
         $ErrorActionPreference = "Stop"
         Write-Host "Downloading winget..."
         
-        # Try to install via App Installer package
+        # Try to install via the Microsoft winget package
         try {
             # Method 1: Install from Microsoft Store (if available)
             Start-Process "ms-windows-store://pdp/?ProductId=9NBLGGH4NNS1" -Wait
-            Write-Host "Please install App Installer from Microsoft Store"
+            Write-Host "Please install Windows Package Manager from Microsoft Store"
         }
         catch {
             Write-Host "Microsoft Store method failed, trying direct download..."
