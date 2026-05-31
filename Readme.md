@@ -1,15 +1,14 @@
 # Windows Automation Toolkit v2.0.1
 
-A comprehensive Windows 10/11 optimization and productivity toolkit that automates system tweaks, software installation, and configuration tasks.
+A comprehensive Windows 10/11 optimization toolkit that automates cleanup, system tweaks, power settings, and configuration tasks.
 
 ![Windows Automation Toolkit Interface](docs/assets/main.png)
 
 ## Features
 
 - **Windows Debloat & Tweaks** - Remove bloatware, optimize system settings
+- **Automated Windows Optimization** - Apply OPTIMIZE.md cleanup, privacy, network, interface, service, and performance settings
 - **Power Management** - Unlock Ultimate Performance plan, manage power profiles
-- **App Installer** - Install apps via Winget
-- **AI Tools Installer** - Quick setup for AI development tools
 - **AutoHotKey Manager** - Manage automation scripts
 
 ## Documentation
@@ -32,7 +31,9 @@ This will:
 - Extract and launch the toolkit immediately
 - No Python required
 
-Or download manually from [Releases](https://github.com/Drakaniia/qwenzy/releases)
+Or download manually from [Releases](https://github.com/Drakaniia/windows-automation-toolkit/releases)
+
+For all installation paths, see the [Full Installation Guide](docs/INSTALLATION.md).
 
 ### Option 2: Manual Installation
 **Best for:** Developers, contributors
@@ -55,20 +56,31 @@ powershell -ExecutionPolicy Bypass ".\scripts\build-exe.ps1"
 - Windows 10/11
 - Administrator privileges (recommended)
 - Internet connection (for downloads)
-- Windows Package Manager (winget) - for app installation features
+- Windows Package Manager (winget) - for package-managed toolkit actions
 
 ## Usage
 
 1. Launch the toolkit (via executable or `python main.py`)
 2. Accept admin privileges when prompted
-3. Navigate the menu to access different modules
+3. Use the Textual tabs and action tables to access different modules
 4. All operations require confirmation before execution
+
+### Textual TUI
+
+The default Python entry point now opens a modern Textual interface:
+
+```bash
+python main.py
+```
+
+Use the search field to filter actions, arrow keys to move through tables, `r` to run the selected action, `Ctrl+R` to refresh status, and `q` to quit. Actions that install software, run remote PowerShell scripts, or change system configuration ask for confirmation first.
+
+The TUI code lives in `src/tui/app.py`, the UI-neutral action catalog and command execution live in `src/tui/services.py`, and styling is isolated in `src/tui/toolkit.tcss`.
 
 ## Troubleshooting
 
 - **Winget not found**: Install Windows Package Manager from Microsoft Store
 - **PowerShell scripts blocked**: Run as administrator
-- **Node.js required**: Install via Essential Apps installer before using AI tools
 
 ## License
 

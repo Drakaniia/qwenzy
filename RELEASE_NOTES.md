@@ -30,9 +30,8 @@ python main.py
 
 ## Features
 - Windows Debloat & Tweaks
+- Automated Windows Optimization
 - Power Management (Ultimate Performance plan)
-- App Installer via Winget
-- AI Tools Installer
 - AutoHotKey Manager
 
 ## Notes
@@ -66,9 +65,8 @@ python main.py
 
 ## Features
 - Windows Debloat & Tweaks
+- Automated Windows Optimization
 - Power Management (Ultimate Performance plan)
-- App Installer via Winget
-- AI Tools Installer
 - AutoHotKey Manager
 
 ## Notes
