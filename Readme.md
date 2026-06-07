@@ -23,15 +23,16 @@ Choose the method that works best for you:
 **Best for:** Quick use, no Python installation needed
 
 ```powershell
-powershell -ExecutionPolicy Bypass "iwr https://raw.githubusercontent.com/Drakaniia/qwenzy/main/scripts/install.ps1 | iex"
+powershell -ExecutionPolicy Bypass "iwr -UseBasicParsing https://raw.githubusercontent.com/Drakaniia/qwenzy/main/scripts/install.ps1 | iex"
 ```
 
 This will:
 - Download the latest `.zip` from Releases
 - Extract and launch the toolkit immediately
+- Request administrator elevation before launching
 - No Python required
 
-Or download manually from [Releases](https://github.com/Drakaniia/windows-automation-toolkit/releases)
+Or download manually from [Releases](https://github.com/Drakaniia/qwenzy/releases)
 
 For all installation paths, see the [Full Installation Guide](docs/INSTALLATION.md).
 

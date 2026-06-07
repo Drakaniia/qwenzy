@@ -5,9 +5,9 @@ param([switch]$NoPrompt)
 
 $ErrorActionPreference = "Stop"
 $ReleaseUrl = "https://api.github.com/repos/Drakaniia/qwenzy/releases/latest"
-$TempDir = $env:TEMP
-$ExePath = Join-Path $TempDir "WindowsAutomationToolkit.exe"
-$ZipPath = Join-Path $TempDir "WindowsToolkit.zip"
+$InstallDir = Join-Path $env:TEMP "WindowsToolkit"
+$ExePath = Join-Path $InstallDir "WindowsToolkit.exe"
+$ZipPath = Join-Path $InstallDir "WindowsToolkit.zip"
 
 function Write-Header {
     param([string]$Title)
@@ -31,10 +31,11 @@ function Get-LatestRelease {
 function Download-Executable {
     param([string]$DownloadUrl)
 
-    Write-Host "Downloading WindowsAutomationToolkit.exe..." -ForegroundColor Yellow
+    Write-Host "Downloading WindowsToolkit.exe..." -ForegroundColor Yellow
     Write-Host "From: $DownloadUrl" -ForegroundColor Gray
 
     try {
+        New-Item -ItemType Directory -Path $InstallDir -Force | Out-Null
         Invoke-WebRequest -Uri $DownloadUrl -OutFile $ExePath -UseBasicParsing
         Write-Host "Download complete!" -ForegroundColor Green
     } catch {
@@ -50,11 +51,16 @@ function Download-And-Extract-Zip {
     Write-Host "From: $DownloadUrl" -ForegroundColor Gray
 
     try {
+        New-Item -ItemType Directory -Path $InstallDir -Force | Out-Null
         Invoke-WebRequest -Uri $DownloadUrl -OutFile $ZipPath -UseBasicParsing
         Write-Host "Download complete! Extracting..." -ForegroundColor Green
         
-        Expand-Archive -Path $ZipPath -DestinationPath $TempDir -Force
+        Expand-Archive -Path $ZipPath -DestinationPath $InstallDir -Force
         Remove-Item $ZipPath -Force
+
+        if (-not (Test-Path -Path $ExePath)) {
+            throw "Expected executable not found after extraction: $ExePath"
+        }
         
         Write-Host "Extraction complete!" -ForegroundColor Green
     } catch {
@@ -76,7 +82,7 @@ Write-Header "Windows Toolkit - Executable Launcher"
 $release = Get-LatestRelease
 
 # Try to find .exe first, then .zip
-$asset = $release.assets | Where-Object { $_.name -eq "WindowsAutomationToolkit.exe" }
+$asset = $release.assets | Where-Object { $_.name -eq "WindowsToolkit.exe" }
 $useZip = $false
 
 if (-not $asset) {
@@ -85,7 +91,7 @@ if (-not $asset) {
 }
 
 if (-not $asset) {
-    Write-Host "No WindowsAutomationToolkit.exe or WindowsAutomationToolkit.zip found in latest release!" -ForegroundColor Red
+    Write-Host "No WindowsToolkit.exe or WindowsToolkit.zip found in latest release!" -ForegroundColor Red
     Write-Host "Latest release: $($release.tag_name)" -ForegroundColor Yellow
     Write-Host "Check releases at: https://github.com/Drakaniia/qwenzy/releases" -ForegroundColor Yellow
     exit 1
@@ -103,7 +109,7 @@ if ($useZip) {
 
 if (Confirm-Run) {
     Write-Host "`nLaunching Windows Toolkit..." -ForegroundColor Green
-    Start-Process -FilePath $ExePath -Wait
+    Start-Process -FilePath $ExePath -Verb RunAs -Wait
 } else {
     Write-Host "`nExecutable saved to: $ExePath" -ForegroundColor Yellow
     Write-Host "Run it manually or create a shortcut." -ForegroundColor Gray

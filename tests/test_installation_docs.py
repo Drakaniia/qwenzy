@@ -68,7 +68,7 @@ def test_installation_guide_has_standalone_executable_method():
         "INSTALLATION.md missing Standalone Executable method"
     assert 'Releases' in content, \
         "INSTALLATION.md missing Releases link for Method 2"
-    assert 'WindowsAutomationToolkit.exe' in content, \
+    assert 'WindowsToolkit.exe' in content, \
         "INSTALLATION.md missing executable name"
     print("✓ docs/INSTALLATION.md has Standalone Executable method")
 
@@ -82,8 +82,8 @@ def test_installation_guide_has_traditional_installer_method():
 
     assert '### Method 3: Traditional Installer' in content, \
         "INSTALLATION.md missing Traditional Installer method"
-    assert 'WindowsAutomationToolkit-Setup.exe' in content, \
-        "INSTALLATION.md missing installer name"
+    assert 'setup executable' in content, \
+        "INSTALLATION.md missing installer reference"
     assert 'Start Menu' in content, \
         "INSTALLATION.md missing Start Menu reference"
     assert 'Control Panel' in content, \
@@ -204,7 +204,7 @@ def test_readme_has_releases_link():
         "Readme.md missing Releases reference"
     assert 'github.com' in content, \
         "Readme.md missing GitHub URL"
-    assert 'windows-automation-toolkit/releases' in content, \
+    assert 'Drakaniia/qwenzy/releases' in content, \
         "Readme.md missing releases path"
     print("✓ Readme.md has Releases link")
 

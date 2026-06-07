@@ -7,7 +7,7 @@
 **No Python required** - Automatically installs Python if needed.
 
 ```powershell
-powershell -ExecutionPolicy Bypass "iwr -UseBasicParsing https://raw.githubusercontent.com/Drakaniia/qwenzy/main/scripts/install-toolkit.ps1 | iex"
+powershell -ExecutionPolicy Bypass "iwr -UseBasicParsing https://raw.githubusercontent.com/Drakaniia/qwenzy/main/scripts/install.ps1 | iex"
 ```
 
 **Pros:**
@@ -26,7 +26,8 @@ powershell -ExecutionPolicy Bypass "iwr -UseBasicParsing https://raw.githubuserc
 **No Python required** - Bundled Python runtime.
 
 1. Download from [Releases](https://github.com/Drakaniia/qwenzy/releases)
-2. Run `WindowsAutomationToolkit.exe`
+2. Extract `WindowsToolkit.zip`
+3. Run `WindowsToolkit.exe` as administrator
 
 **Pros:**
 - ✅ No installation needed
@@ -43,7 +44,7 @@ powershell -ExecutionPolicy Bypass "iwr -UseBasicParsing https://raw.githubuserc
 
 **No Python required** - Professional Windows installer.
 
-1. Download `WindowsAutomationToolkit-Setup.exe` from Releases
+1. Download the setup executable from Releases
 2. Run installer
 3. Launch from Start Menu or Desktop
 
