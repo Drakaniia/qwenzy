@@ -5,7 +5,7 @@ $ErrorActionPreference = "Stop"
 
 $RepoOwner = "Drakaniia"
 $RepoName = "qwenzy"
-$Version = "v2.1.4"
+$Version = "v2.1.5"
 $ExePath = Join-Path $PSScriptRoot "..\launcher\WindowsToolkit.exe"
 
 Write-Host "========================================================" -ForegroundColor Cyan

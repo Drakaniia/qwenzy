@@ -2,7 +2,7 @@
 ; Inno Setup script for Windows Automation Toolkit
 
 #define MyAppName "Windows Automation Toolkit"
-#define MyAppVersion "2.1.4"
+#define MyAppVersion "2.1.5"
 #define MyAppPublisher "Drakaniia"  ; TODO: Replace with your name or organization
 #define MyAppExeName "WindowsToolkit.exe"
 

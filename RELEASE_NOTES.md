@@ -1,3 +1,22 @@
+# Release v2.1.5 - Smaller Windows Toolkit Download
+
+## What's New
+- Reworked the local PowerShell build script to use an isolated build virtualenv.
+- Reduced the release zip from about 64 MB to about 14 MB by avoiding unrelated global Python packages.
+- The build script now creates both `WindowsToolkit.exe` and `WindowsToolkit.zip` in `launcher`.
+
+## Bug Fixes
+- Prevented polluted local Python environments from bloating PyInstaller release assets.
+- Added `.build-venv/` to `.gitignore`.
+
+## Installation
+
+```powershell
+powershell -ExecutionPolicy Bypass "iwr -UseBasicParsing https://raw.githubusercontent.com/Drakaniia/qwenzy/main/scripts/install.ps1 | iex"
+```
+
+---
+
 # Release v2.1.4 - Textual Windows Toolkit Executable
 
 ## What's New
