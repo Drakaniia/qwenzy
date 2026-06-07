@@ -13,15 +13,15 @@ a = Analysis(
         ('../src/utils', 'src/utils'),
     ],
     hiddenimports=[
+        'src.tui.app',
+        'src.tui.services',
         'src.config.settings',
         'src.utils.system',
         'src.modules.debloat',
         'src.modules.settings',
         'src.modules.power',
-        'src.modules.installer',
-        'src.modules.ai_tools',
         'src.modules.autohotkey',
-    ] + collect_submodules('src'),
+    ] + collect_submodules('src') + collect_submodules('textual'),
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
@@ -41,7 +41,7 @@ exe = EXE(
     a.zipfiles,
     a.datas,
     [],
-    name='WindowsAutomationToolkit',
+    name='WindowsToolkit',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -58,5 +58,4 @@ exe = EXE(
     # icon='../assets/toolkit.ico',
 )
 
-# Note: The executable name is set to "WindowsAutomationToolkit" to match the class name
-# and all documentation. The actual filename will be WindowsAutomationToolkit.exe
+# Note: The executable name matches the public GitHub release asset name.

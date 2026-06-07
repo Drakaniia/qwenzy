@@ -91,8 +91,10 @@ def test_inno_setup_script_references_launcher_executable():
     with open(iss_path, 'r', encoding='utf-8') as f:
         content = f.read()
 
-    assert 'WindowsAutomationToolkit.exe' in content, \
-        "create-installer.iss does not reference WindowsAutomationToolkit.exe"
+    assert 'WindowsToolkit.exe' in content, \
+        "create-installer.iss does not reference WindowsToolkit.exe"
+    assert 'WindowsAutomationToolkit.exe' not in content, \
+        "create-installer.iss should not reference stale WindowsAutomationToolkit.exe"
     assert '..\\launcher\\' in content or '../launcher/' in content, \
         "create-installer.iss does not reference launcher directory"
 

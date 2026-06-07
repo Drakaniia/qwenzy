@@ -27,7 +27,7 @@ jobs:
     
     - name: Test executable exists
       run: |
-        if (Test-Path "launcher\WindowsAutomationToolkit.exe") {
+        if (Test-Path "launcher\WindowsToolkit.exe") {
           Write-Host "✓ Executable built successfully"
         } else {
           Write-Host "✗ Executable not found"

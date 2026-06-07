@@ -5,8 +5,8 @@ $ErrorActionPreference = "Stop"
 
 $RepoOwner = "Drakaniia"
 $RepoName = "qwenzy"
-$Version = "v2.1.0"
-$ExePath = Join-Path $PSScriptRoot "..\dist\WindowsAutomationToolkit.exe"
+$Version = "v2.1.4"
+$ExePath = Join-Path $PSScriptRoot "..\launcher\WindowsToolkit.exe"
 
 Write-Host "========================================================" -ForegroundColor Cyan
 Write-Host "  Creating GitHub Release $Version" -ForegroundColor Cyan
@@ -15,8 +15,8 @@ Write-Host
 
 # Check if executable exists
 if (-not (Test-Path $ExePath)) {
-    Write-Host "Error: WindowsAutomationToolkit.exe not found!" -ForegroundColor Red
-    Write-Host "Run build-exe.ps1 first." -ForegroundColor Yellow
+    Write-Host "Error: WindowsToolkit.exe not found!" -ForegroundColor Red
+    Write-Host "Run build/build-executable.py first." -ForegroundColor Yellow
     exit 1
 }
 

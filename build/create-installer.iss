@@ -2,9 +2,9 @@
 ; Inno Setup script for Windows Automation Toolkit
 
 #define MyAppName "Windows Automation Toolkit"
-#define MyAppVersion "2.1.2"
+#define MyAppVersion "2.1.4"
 #define MyAppPublisher "Drakaniia"  ; TODO: Replace with your name or organization
-#define MyAppExeName "WindowsAutomationToolkit.exe"
+#define MyAppExeName "WindowsToolkit.exe"
 
 [Setup]
 ; TODO: Generate a new unique AppId GUID using: [Guid]::NewGuid().ToString() in PowerShell

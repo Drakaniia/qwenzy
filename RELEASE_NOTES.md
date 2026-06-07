@@ -1,3 +1,23 @@
+# Release v2.1.4 - Textual Windows Toolkit Executable
+
+## What's New
+- Rebuilt the GitHub release executable from the current Textual TUI entry point.
+- Fixed release automation to publish `WindowsToolkit.exe` and `WindowsToolkit.zip`.
+- Bundled Textual lazy widget modules required by the packaged executable.
+
+## Bug Fixes
+- Fixed the latest-release download opening the old numbered-menu CLI build.
+- Removed stale PyInstaller hidden imports for deleted modules.
+- Prevented the old release-published workflow from uploading duplicate assets.
+
+## Installation
+
+```powershell
+powershell -ExecutionPolicy Bypass "iwr -UseBasicParsing https://raw.githubusercontent.com/Drakaniia/qwenzy/main/scripts/install.ps1 | iex"
+```
+
+---
+
 # Release v2.1.2 - Windows Toolkit Executable
 
 ## What's New

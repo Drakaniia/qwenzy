@@ -46,7 +46,7 @@ def test_toolkit_spec_has_required_structure():
         'PYZ(',
         'EXE(',
         "'../main.py'",
-        "name='WindowsAutomationToolkit'",
+        "name='WindowsToolkit'",
         'datas=',
         'hiddenimports=',
     ]
@@ -66,18 +66,26 @@ def test_toolkit_spec_includes_source_modules():
     
     # Check for required module imports
     required_modules = [
+        'src.tui.app',
+        'src.tui.services',
         'src.config.settings',
         'src.utils.system',
         'src.modules.debloat',
         'src.modules.settings',
         'src.modules.power',
-        'src.modules.installer',
-        'src.modules.ai_tools',
         'src.modules.autohotkey',
     ]
     
     for module in required_modules:
         assert module in content, f"toolkit.spec missing hiddenimport: {module}"
+
+    stale_modules = [
+        'src.modules.installer',
+        'src.modules.ai_tools',
+    ]
+
+    for module in stale_modules:
+        assert module not in content, f"toolkit.spec includes missing hiddenimport: {module}"
     
     print("✓ build/toolkit.spec includes all source modules")
 
@@ -126,6 +134,44 @@ def test_build_executable_script_references_spec():
     print("✓ build/build-executable.py references toolkit.spec")
 
 
+def test_build_executable_script_outputs_release_asset_name():
+    """Test that build-executable.py creates the published executable name"""
+    script_path = os.path.join(ROOT_DIR, 'build', 'build-executable.py')
+
+    with open(script_path, 'r') as f:
+        content = f.read()
+
+    assert 'WindowsToolkit.exe' in content, \
+        "build-executable.py should output WindowsToolkit.exe"
+    assert 'WindowsAutomationToolkit.exe' not in content, \
+        "build-executable.py should not use stale WindowsAutomationToolkit.exe"
+    print("build/build-executable.py outputs WindowsToolkit.exe")
+
+
+def test_build_exe_powershell_script_outputs_release_asset_name():
+    """Test that build-exe.ps1 reports the published executable name"""
+    script_path = os.path.join(ROOT_DIR, 'scripts', 'build-exe.ps1')
+
+    with open(script_path, 'r') as f:
+        content = f.read()
+
+    assert 'WindowsToolkit.exe' in content, \
+        "build-exe.ps1 should report WindowsToolkit.exe"
+    assert 'WindowsAutomationToolkit.exe' not in content, \
+        "build-exe.ps1 should not report stale WindowsAutomationToolkit.exe"
+
+
+def test_toolkit_spec_collects_textual_submodules():
+    """Test that PyInstaller bundles Textual's lazy widget modules"""
+    spec_path = os.path.join(ROOT_DIR, 'build', 'toolkit.spec')
+
+    with open(spec_path, 'r') as f:
+        content = f.read()
+
+    assert "collect_submodules('textual')" in content, \
+        "toolkit.spec should collect Textual submodules for lazy widget imports"
+
+
 def test_launcher_directory_in_gitignore():
     """Test that launcher/ directory is in .gitignore"""
     gitignore_path = os.path.join(ROOT_DIR, '.gitignore')
@@ -148,6 +194,9 @@ if __name__ == '__main__':
         test_build_executable_script_valid_syntax,
         test_build_executable_script_has_build_function,
         test_build_executable_script_references_spec,
+        test_build_executable_script_outputs_release_asset_name,
+        test_build_exe_powershell_script_outputs_release_asset_name,
+        test_toolkit_spec_collects_textual_submodules,
         test_launcher_directory_in_gitignore,
     ]
     

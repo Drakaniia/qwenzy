@@ -97,20 +97,15 @@ def test_release_workflow_has_build_executable_job():
 
 
 def test_release_workflow_has_build_installer_job():
-    """Test that release.yml has build-installer job"""
+    """Test that release.yml does not depend on the obsolete installer build"""
     workflow_path = os.path.join(ROOT_DIR, '.github', 'workflows', 'release.yml')
 
     with open(workflow_path, 'r') as f:
         workflow = yaml.safe_load(f)
 
     jobs = workflow.get('jobs', {})
-    assert 'build-installer' in jobs, "release.yml missing 'build-installer' job"
-    
-    job = jobs['build-installer']
-    assert 'runs-on' in job, "build-installer job missing 'runs-on'"
-    assert job['runs-on'] == 'windows-latest', "build-installer job should run on windows-latest"
-    assert 'needs' in job, "build-installer job missing 'needs' dependency"
-    assert 'build-executable' in job['needs'], "build-installer should need build-executable"
+    assert 'build-installer' not in jobs, \
+        "release.yml should not depend on obsolete installer artifacts"
     
     print("✓ release.yml has build-installer job with correct dependency")
 
@@ -129,8 +124,10 @@ def test_release_workflow_has_create_release_job():
     assert 'runs-on' in job, "create-release job missing 'runs-on'"
     assert job['runs-on'] == 'windows-latest', "create-release job should run on windows-latest"
     assert 'needs' in job, "create-release job missing 'needs' dependency"
-    assert 'build-executable' in job['needs'] and 'build-installer' in job['needs'], \
-        "create-release should need both build-executable and build-installer"
+    assert 'build-executable' in job['needs'], \
+        "create-release should need build-executable"
+    assert 'build-installer' not in job['needs'], \
+        "create-release should not need obsolete installer artifacts"
     
     print("✓ release.yml has create-release job with correct dependencies")
 
@@ -165,23 +162,25 @@ def test_release_workflow_builds_executable_correctly():
 
     assert 'python build/build-executable.py' in content, \
         "release.yml missing 'python build/build-executable.py' command"
-    assert 'WindowsAutomationToolkit.exe' in content, \
-        "release.yml missing reference to WindowsAutomationToolkit.exe"
+    assert 'WindowsToolkit.exe' in content, \
+        "release.yml missing reference to WindowsToolkit.exe"
+    assert 'WindowsAutomationToolkit.exe' not in content, \
+        "release.yml should not reference stale WindowsAutomationToolkit.exe"
     
     print("✓ release.yml builds executable correctly")
 
 
 def test_release_workflow_builds_installer_correctly():
-    """Test that release.yml builds installer with correct script"""
+    """Test that release.yml builds the zip artifact used by install.ps1"""
     workflow_path = os.path.join(ROOT_DIR, '.github', 'workflows', 'release.yml')
 
     with open(workflow_path, 'r') as f:
         content = f.read()
 
-    assert 'build-installer.bat' in content or 'build-installer.cmd' in content, \
-        "release.yml missing reference to build-installer.bat"
-    assert 'WindowsAutomationToolkit-Setup.exe' in content, \
-        "release.yml missing reference to WindowsAutomationToolkit-Setup.exe"
+    assert 'Compress-Archive' in content, \
+        "release.yml missing zip archive creation"
+    assert 'WindowsToolkit.zip' in content, \
+        "release.yml missing WindowsToolkit.zip artifact"
     
     print("✓ release.yml builds installer correctly")
 
@@ -193,10 +192,12 @@ def test_release_workflow_has_release_files():
     with open(workflow_path, 'r') as f:
         content = f.read()
 
-    assert 'WindowsAutomationToolkit.exe' in content, \
-        "release.yml missing WindowsAutomationToolkit.exe in release files"
-    assert 'WindowsAutomationToolkit-Setup.exe' in content, \
-        "release.yml missing WindowsAutomationToolkit-Setup.exe in release files"
+    assert 'WindowsToolkit.exe' in content, \
+        "release.yml missing WindowsToolkit.exe in release files"
+    assert 'WindowsToolkit.zip' in content, \
+        "release.yml missing WindowsToolkit.zip in release files"
+    assert 'WindowsAutomationToolkit.exe' not in content, \
+        "release.yml should not publish stale WindowsAutomationToolkit.exe"
     
     print("✓ release.yml includes correct files in release")
 
@@ -265,8 +266,10 @@ def test_build_executable_workflow_builds_correctly():
 
     assert 'python build/build-executable.py' in content, \
         "build-executable.yml missing 'python build/build-executable.py' command"
-    assert 'WindowsAutomationToolkit.exe' in content, \
-        "build-executable.yml missing reference to WindowsAutomationToolkit.exe"
+    assert 'WindowsToolkit.exe' in content, \
+        "build-executable.yml missing reference to WindowsToolkit.exe"
+    assert 'WindowsAutomationToolkit.exe' not in content, \
+        "build-executable.yml should not reference stale WindowsAutomationToolkit.exe"
     
     print("✓ build-executable.yml builds executable correctly")
 
@@ -279,7 +282,7 @@ def test_build_executable_workflow_has_test_step():
         content = f.read()
 
     assert 'Test-Path' in content, "build-executable.yml missing Test-Path command"
-    assert 'WindowsAutomationToolkit.exe' in content, \
+    assert 'WindowsToolkit.exe' in content, \
         "build-executable.yml missing executable path check"
     
     print("✓ build-executable.yml has test step for executable")

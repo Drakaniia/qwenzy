@@ -8,75 +8,59 @@ on:
 jobs:
   build-executable:
     runs-on: windows-latest
-    
+
     steps:
     - uses: actions/checkout@v4
-    
+
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
         python-version: '3.11'
-    
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-    
+
     - name: Build executable
       run: |
         python build/build-executable.py
-    
+
+    - name: Build zip archive
+      shell: pwsh
+      run: |
+        Compress-Archive -Path launcher\WindowsToolkit.exe -DestinationPath launcher\WindowsToolkit.zip -Force
+
     - name: Upload executable artifact
       uses: actions/upload-artifact@v4
       with:
         name: toolkit-executable
-        path: launcher/WindowsAutomationToolkit.exe
-    
-  build-installer:
-    needs: build-executable
-    runs-on: windows-latest
-    
-    steps:
-    - uses: actions/checkout@v4
-    
-    - name: Download executable
-      uses: actions/download-artifact@v4
-      with:
-        name: toolkit-executable
-        path: launcher/
-    
-    - name: Build installer
-      run: |
-        .\build\build-installer.bat
-    
-    - name: Upload installer artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: toolkit-installer
-        path: installer/WindowsAutomationToolkit-Setup.exe
-    
+        path: |
+          launcher/WindowsToolkit.exe
+          launcher/WindowsToolkit.zip
+
   create-release:
-    needs: [build-executable, build-installer]
+    needs: [build-executable]
     runs-on: windows-latest
-    
+
     steps:
     - uses: actions/checkout@v4
-    
+
     - name: Download all artifacts
       uses: actions/download-artifact@v4
-    
+
     - name: Create Release
       uses: softprops/action-gh-release@v1
       with:
         files: |
-          toolkit-executable/WindowsAutomationToolkit.exe
-          toolkit-installer/WindowsAutomationToolkit-Setup.exe
+          toolkit-executable/WindowsToolkit.exe
+          toolkit-executable/WindowsToolkit.zip
         body: |
           ## Changes
-          - Standalone executable (no Python required)
-          - Windows installer package
-          - PowerShell launcher script
-          
+          - Standalone executable built from the current Textual interface
+          - ZIP archive for the one-line PowerShell launcher
+          - PowerShell launcher script downloads WindowsToolkit.zip
+
           ## Installation
           See [INSTALLATION.md](docs/INSTALLATION.md) for details.
       env:
