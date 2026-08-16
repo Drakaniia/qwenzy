@@ -33,9 +33,6 @@ MANIFEST
 *.spec
 !build/*.spec
 
-# Ignore build directory
-build/
-
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
@@ -162,3 +159,6 @@ Documents/AutoHotKey/*.ahk
 worktrees/
 launcher/
 installer/
+.qwen/settings.json
+.claude/settings.local.json
+.kiro/agents/emdash.json
