@@ -31,7 +31,7 @@ $ScriptUrl = "https://raw.githubusercontent.com/YOUR_USERNAME/qwenzy/main/script
 #### `docs/INSTALLATION.md` (Multiple locations)
 Replace all instances of `Drakaniia/qwenzy` with your fork's path.
 
-#### `Readme.md` (Multiple locations)
+#### `README.md` (Multiple locations)
 Replace all instances of `Drakaniia/qwenzy` with your fork's path.
 
 ---
@@ -224,7 +224,7 @@ After pushing a version tag:
 ### Verify Documentation
 
 Ensure all links in documentation point to your repository:
-- [ ] `Readme.md` installation links
+- [ ] `README.md` installation links
 - [ ] `docs/INSTALLATION.md` download links
 - [ ] All `yourusername` placeholders replaced
 
