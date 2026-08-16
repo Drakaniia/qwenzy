@@ -21,9 +21,20 @@ def read_requirements():
             return [line.strip() for line in f if line.strip() and not line.startswith('#')]
     return []
 
+# Single source of truth: src/__init__.py
+BASE_DIR = os.path.dirname(__file__)
+
+def read_version():
+    init_path = os.path.join(BASE_DIR, 'src', '__init__.py')
+    with open(init_path, 'r', encoding='utf-8') as f:
+        for line in f:
+            if line.startswith('__version__'):
+                return line.split('=', 1)[1].strip().strip('"\'')
+    raise RuntimeError(f"__version__ not found in {init_path}")
+
 setup(
     name="windows-automation-toolkit",
-    version="2.1.1",
+    version=read_version(),
     author="AI Assistant",
     author_email="ai@example.com",
     description="A comprehensive Windows 10/11 optimization and productivity toolkit",
@@ -50,7 +61,7 @@ setup(
     },
     entry_points={
         "console_scripts": [
-            "windows-toolkit=main:main",
+            "windows-toolkit=src.cli:main",
         ],
     },
     include_package_data=True,
