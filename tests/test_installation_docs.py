@@ -164,75 +164,75 @@ def test_installation_guide_has_troubleshooting():
 
 
 def test_readme_has_installation_options():
-    """Test that Readme.md has Installation Options section"""
-    readme_path = os.path.join(ROOT_DIR, 'Readme.md')
+    """Test that README.md has Installation Options section"""
+    readme_path = os.path.join(ROOT_DIR, 'README.md')
 
-    assert os.path.exists(readme_path), f"Readme.md not found at {readme_path}"
+    assert os.path.exists(readme_path), f"README.md not found at {readme_path}"
 
     with open(readme_path, 'r', encoding='utf-8') as f:
         content = f.read()
 
     assert '## Installation Options' in content, \
-        "Readme.md missing Installation Options section"
-    print("✓ Readme.md has Installation Options section")
+        "README.md missing Installation Options section"
+    print("✓ README.md has Installation Options section")
 
 
 def test_readme_has_quick_install_command():
-    """Test that Readme.md has Quick Install PowerShell command"""
-    readme_path = os.path.join(ROOT_DIR, 'Readme.md')
+    """Test that README.md has Quick Install PowerShell command"""
+    readme_path = os.path.join(ROOT_DIR, 'README.md')
 
     with open(readme_path, 'r', encoding='utf-8') as f:
         content = f.read()
 
     assert 'powershell -ExecutionPolicy Bypass' in content, \
-        "Readme.md missing Quick Install PowerShell command"
+        "README.md missing Quick Install PowerShell command"
     assert 'iwr' in content, \
-        "Readme.md missing iwr (Invoke-WebRequest) command"
+        "README.md missing iwr (Invoke-WebRequest) command"
     assert 'iex' in content, \
-        "Readme.md missing iex (Invoke-Expression) command"
-    print("✓ Readme.md has Quick Install PowerShell command")
+        "README.md missing iex (Invoke-Expression) command"
+    print("✓ README.md has Quick Install PowerShell command")
 
 
 def test_readme_has_releases_link():
-    """Test that Readme.md has Releases link"""
-    readme_path = os.path.join(ROOT_DIR, 'Readme.md')
+    """Test that README.md has Releases link"""
+    readme_path = os.path.join(ROOT_DIR, 'README.md')
 
     with open(readme_path, 'r', encoding='utf-8') as f:
         content = f.read()
 
     assert 'Releases' in content, \
-        "Readme.md missing Releases reference"
+        "README.md missing Releases reference"
     assert 'github.com' in content, \
-        "Readme.md missing GitHub URL"
+        "README.md missing GitHub URL"
     assert 'Drakaniia/qwenzy/releases' in content, \
-        "Readme.md missing releases path"
-    print("✓ Readme.md has Releases link")
+        "README.md missing releases path"
+    print("✓ README.md has Releases link")
 
 
 def test_readme_links_to_installation_guide():
-    """Test that Readme.md links to docs/INSTALLATION.md"""
-    readme_path = os.path.join(ROOT_DIR, 'Readme.md')
+    """Test that README.md links to docs/INSTALLATION.md"""
+    readme_path = os.path.join(ROOT_DIR, 'README.md')
 
     with open(readme_path, 'r', encoding='utf-8') as f:
         content = f.read()
 
     assert 'docs/INSTALLATION.md' in content, \
-        "Readme.md missing link to docs/INSTALLATION.md"
+        "README.md missing link to docs/INSTALLATION.md"
     assert 'Full Installation Guide' in content, \
-        "Readme.md missing Full Installation Guide reference"
-    print("✓ Readme.md links to docs/INSTALLATION.md")
+        "README.md missing Full Installation Guide reference"
+    print("✓ README.md links to docs/INSTALLATION.md")
 
 
 def test_readme_mentions_no_python_required():
-    """Test that Readme.md mentions 'No Python Required' option"""
-    readme_path = os.path.join(ROOT_DIR, 'Readme.md')
+    """Test that README.md mentions 'No Python Required' option"""
+    readme_path = os.path.join(ROOT_DIR, 'README.md')
 
     with open(readme_path, 'r', encoding='utf-8') as f:
         content = f.read()
 
     assert 'No Python' in content or 'no Python' in content, \
-        "Readme.md missing 'No Python Required' mention"
-    print("✓ Readme.md mentions 'No Python Required' option")
+        "README.md missing 'No Python Required' mention"
+    print("✓ README.md mentions 'No Python Required' option")
 
 
 if __name__ == '__main__':
