@@ -30,13 +30,29 @@ POWERSHELL_SCRIPTS = {
             "description": "Windows activation script"
         }
     },
-    "memory_cleaner": {
+    "optimization_apps": {
         "winmemorycleaner": {
             "name": "Windows Memory Cleaner",
             "description": "Open-source memory cleaner for Windows",
             "install_methods": {
                 "choco": "choco install winmemorycleaner",
                 "winget": "winget install IgorMundstein.WinMemoryCleaner"
+            }
+        },
+        "bleachbit": {
+            "name": "BleachBit",
+            "description": "Free disk space cleaner and privacy tool",
+            "install_methods": {
+                "choco": "choco install bleachbit",
+                "winget": "winget install BleachBit.BleachBit"
+            }
+        },
+        "memreduct": {
+            "name": "MemReduct",
+            "description": "Lightweight real-time memory management tool",
+            "install_methods": {
+                "choco": "choco install memreduct",
+                "winget": "winget install Henry++.MemReduct"
             }
         }
     }

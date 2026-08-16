@@ -38,8 +38,8 @@ class WindowsDebloat:
                 options[str(script_index)] = {"title": f"{script['name']} - {script['description']}"}
                 script_index += 1
 
-            # Add memory cleaner option
-            for key, script in self.scripts["memory_cleaner"].items():
+            # Add optimization apps
+            for key, script in self.scripts["optimization_apps"].items():
                 options[str(script_index)] = {"title": f"{script['name']} - {script['description']}"}
                 script_index += 1
 
@@ -84,15 +84,15 @@ class WindowsDebloat:
             all_scripts[script_index] = (script['url'], script['name'], 'powershell')
             script_index += 1
 
-        # Add memory cleaner scripts
-        for key, script in self.scripts["memory_cleaner"].items():
-            all_scripts[script_index] = (script, script['name'], 'memory_cleaner')
+        # Add optimization apps
+        for key, script in self.scripts["optimization_apps"].items():
+            all_scripts[script_index] = (script, script['name'], 'optimization_app')
             script_index += 1
 
         if choice in all_scripts:
             data, name, script_type = all_scripts[choice]
-            if script_type == 'memory_cleaner':
-                self.install_memory_cleaner(data)
+            if script_type == 'optimization_app':
+                self.install_optimization_app(data)
             else:
                 url = data
                 success = self.system.run_powershell_script(url, name)
@@ -130,10 +130,10 @@ class WindowsDebloat:
         """Run Windows Activation script"""
         return self.run_debloat_script("activation", "activate_windows")
 
-    def install_memory_cleaner(self, script_data):
-        """Install Windows Memory Cleaner with user's choice of package manager"""
+    def install_optimization_app(self, script_data):
+        """Install an optimization app with user's choice of package manager"""
         self.system.clear_screen()
-        self.system.print_header("Windows Memory Cleaner Installation")
+        self.system.print_header(f"{script_data['name']} Installation")
 
         # Check if any package manager is available
         winget_available = self.system.check_winget_available()
@@ -158,10 +158,10 @@ class WindowsDebloat:
         options = []
         if choco_available:
             options.append(("1", "choco"))
-            print("     [1] Chocolatey (choco install winmemorycleaner)")
+            print(f"     [1] Chocolatey ({script_data['install_methods']['choco']})")
         if winget_available:
             options.append(("2", "winget"))
-            print("     [2] Winget (winget install IgorMundstein.WinMemoryCleaner)")
+            print(f"     [2] Winget ({script_data['install_methods']['winget']})")
 
         if not options:
             print(" No package managers available!")
@@ -186,7 +186,7 @@ class WindowsDebloat:
                 cmd = script_data["install_methods"][selected_method]
                 print(f" Running: {cmd}")
                 self.system.run_command(cmd)
-                print(" Windows Memory Cleaner installation completed")
+                print(f" {script_data['name']} installation completed")
             else:
                 print(" Invalid option")
 
