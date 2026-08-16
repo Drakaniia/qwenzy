@@ -18,7 +18,7 @@ a = Analysis(
         'src.config.settings',
         'src.utils.system',
         'src.modules.debloat',
-        'src.modules.settings',
+        'src.modules.windows_settings',
         'src.modules.power',
         'src.modules.autohotkey',
     ] + collect_submodules('src') + collect_submodules('textual'),
