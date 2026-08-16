@@ -1,3 +1,26 @@
+# Release v2.2.0 - Modular Architecture & More Optimization Apps
+
+## What's New
+- **Modular TUI service layer**: split the monolithic service module into focused modules for data models, action catalog sections, PowerShell script generation, and action executors.
+- **Modular utilities**: `SystemUtils` is now composed from dedicated console UI, PowerShell, package manager, and filesystem mixins with an unchanged public API.
+- **AutoHotKey package**: the AutoHotKey manager is organized into installation, script, runtime, and startup modules.
+- **New optimization apps**: install **BleachBit** and **MemReduct** from the Debloat tab via winget or Chocolatey, alongside Windows Memory Cleaner.
+- **CLI entry point**: the toolkit is available as a `windows-toolkit` console command.
+- Package version is now sourced from `src/__init__.py` (the separate `VERSION` file was removed).
+
+## Housekeeping
+- Renamed `Readme.md` to `README.md` and updated all references and tests.
+- Added `.gitattributes` to normalize line endings (LF for source/docs, CRLF for Windows scripts).
+- Removed the unused `requests` dependency and obsolete files (superseded workflow, archived plan doc, placeholder release executable).
+
+## Installation
+
+```powershell
+powershell -ExecutionPolicy Bypass "iwr -UseBasicParsing https://raw.githubusercontent.com/Drakaniia/qwenzy/main/scripts/install.ps1 | iex"
+```
+
+---
+
 # Release v2.1.5 - Smaller Windows Toolkit Download
 
 ## What's New
