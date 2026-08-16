@@ -71,7 +71,7 @@ def test_toolkit_spec_includes_source_modules():
         'src.config.settings',
         'src.utils.system',
         'src.modules.debloat',
-        'src.modules.settings',
+        'src.modules.windows_settings',
         'src.modules.power',
         'src.modules.autohotkey',
     ]
