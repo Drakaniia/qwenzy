@@ -1,0 +1,21 @@
+# Normalize line endings for all text files
+* text=auto
+
+# Source code: LF
+*.py    text eol=lf
+*.yml   text eol=lf
+*.yaml  text eol=lf
+*.md    text eol=lf
+*.txt   text eol=lf
+*.tcss  text eol=lf
+*.spec  text eol=lf
+
+# Windows-native scripts: keep CRLF
+*.ps1   text eol=crlf
+*.bat   text eol=crlf
+*.iss   text eol=crlf
+
+# Binary assets
+*.png   binary
+*.exe   binary
+*.zip   binary
